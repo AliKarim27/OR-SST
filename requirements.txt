@@ -1,0 +1,13 @@
+gradio==4.44.0
+numpy
+librosa
+torch
+transformers
+datasets
+accelerate
+seqeval
+faster-whisper
+openai-whisper
+pydantic
+python-dateutil
+streamlit

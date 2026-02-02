@@ -1,0 +1,5 @@
+{"tokens": ["patient", "condition", "stable"], "tags": ["O", "O", "B-CONDITION"]}
+{"tokens": ["blood", "pressure", "one", "twenty", "over", "eighty"], "tags": ["O", "O", "B-BP_SYS", "I-BP_SYS", "O", "B-BP_DIA"]}
+{"tokens": ["heart", "rate", "seventy", "five"], "tags": ["O", "O", "B-HR", "I-HR"]}
+{"tokens": ["oxygen", "saturation", "ninety", "eight"], "tags": ["O", "O", "B-SPO2", "I-SPO2"]}
+{"tokens": ["gave", "morphine", "five", "milligrams", "iv"], "tags": ["O", "B-DRUG", "B-DOSE", "B-UNIT", "O"]}

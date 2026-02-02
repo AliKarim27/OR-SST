@@ -1,0 +1,24 @@
+{"tokens": ["date", "twenty", "one", "eleven", "two", "thousand", "twenty", "six"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE", "I-DATE", "I-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["in", "time", "nine", "thirty", "am"], "tags": ["O", "O", "B-TIME_IN", "I-TIME_IN", "I-TIME_IN"]}
+{"tokens": ["out", "time", "ten", "twenty", "five", "am"], "tags": ["O", "O", "B-TIME_OUT", "I-TIME_OUT", "I-TIME_OUT", "I-TIME_OUT"]}
+{"tokens": ["induction", "time", "nine", "thirty", "two", "am"], "tags": ["O", "O", "B-TIME_INDUCTION", "I-TIME_INDUCTION", "I-TIME_INDUCTION", "I-TIME_INDUCTION"]}
+{"tokens": ["cutting", "time", "nine", "fifty", "one", "am"], "tags": ["O", "O", "B-TIME_CUTTING", "I-TIME_CUTTING", "I-TIME_CUTTING", "I-TIME_CUTTING"]}
+{"tokens": ["time", "of", "dressing", "ten", "twelve", "am"], "tags": ["O", "O", "O", "B-TIME_DRESSING", "I-TIME_DRESSING", "I-TIME_DRESSING"]}
+{"tokens": ["surgeon", "doctor", "mohammad", "farhat"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["anesthetist", "doctor", "nadine"], "tags": ["O", "O", "B-PERSON_ANESTHETIST"]}
+{"tokens": ["scrub", "nurse", "aida", "saba"], "tags": ["O", "O", "B-PERSON_SCRUB", "I-PERSON_SCRUB"]}
+{"tokens": ["circulating", "nurse", "nabil", "habib"], "tags": ["O", "O", "B-PERSON_CIRC", "I-PERSON_CIRC"]}
+{"tokens": ["technician", "anesthesia", "sabah"], "tags": ["O", "O", "B-PERSON_TECH"]}
+{"tokens": ["pre", "operative", "diagnosis", "pregnancy"], "tags": ["O", "O", "O", "B-DIAG_PRE"]}
+{"tokens": ["post", "operative", "diagnosis", "cesarean", "section"], "tags": ["O", "O", "O", "B-DIAG_POST", "I-DIAG_POST"]}
+{"tokens": ["operation", "code", "five", "nine", "five", "one", "five"], "tags": ["O", "O", "B-OP_CODE", "I-OP_CODE", "I-OP_CODE", "I-OP_CODE", "I-OP_CODE"]}
+{"tokens": ["operation", "cesarean", "section"], "tags": ["O", "B-OP_NAME", "I-OP_NAME"]}
+{"tokens": ["anesthesia", "type", "spinal"], "tags": ["O", "O", "B-ANES_TYPE"]}
+{"tokens": ["patient", "position", "supine"], "tags": ["O", "O", "B-POSITION"]}
+{"tokens": ["foley", "catheter", "with", "irrigation"], "tags": ["B-DEVICE", "I-DEVICE", "O", "I-DEVICE"]}
+{"tokens": ["hemovac", "drain", "inserted"], "tags": ["B-DEVICE", "I-DEVICE", "O"]}
+{"tokens": ["specimen", "sent", "to", "pathology"], "tags": ["O", "O", "O", "B-SPECIMEN"]}
+{"tokens":["surgeon","one","dr","ali","krayem"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
+{"tokens":["surgeon","two","dr","mohammad","farhat"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
+{"tokens":["first","surgeon","doctor","ali","krayem"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
+{"tokens":["second","surgeon","doctor","mohammad","farhat"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}

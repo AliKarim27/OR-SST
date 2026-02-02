@@ -1,0 +1,137 @@
+{
+  "date": {
+    "labels": ["B-DATE", "I-DATE"],
+    "type": "date",
+    "target": "date"
+  },
+
+  "time_in": {
+    "labels": ["B-TIME_IN", "I-TIME_IN"],
+    "type": "time",
+    "target": "times.in"
+  },
+
+  "time_out": {
+    "labels": ["B-TIME_OUT", "I-TIME_OUT"],
+    "type": "time",
+    "target": "times.out"
+  },
+
+  "time_induction": {
+    "labels": ["B-TIME_INDUCTION", "I-TIME_INDUCTION"],
+    "type": "time",
+    "target": "times.induction"
+  },
+
+  "surgeon": {
+    "labels": ["B-PERSON_SURGEON", "I-PERSON_SURGEON"],
+    "type": "person",
+    "target": "personnel.surgeon_1"
+  },
+
+  "anesthetist": {
+    "labels": ["B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"],
+    "type": "person",
+    "target": "personnel.anesthetist"
+  },
+
+  "pre_op_diagnosis": {
+    "labels": ["B-DIAG_PRE", "I-DIAG_PRE"],
+    "type": "text",
+    "target": "diagnosis.pre_op"
+  },
+
+  "post_op_diagnosis": {
+    "labels": ["B-DIAG_POST", "I-DIAG_POST"],
+    "type": "text",
+    "target": "diagnosis.post_op"
+  },
+
+  "operation_name": {
+    "labels": ["B-OP_NAME", "I-OP_NAME"],
+    "type": "text",
+    "target": "operation.name"
+  },
+
+  "operation_code": {
+    "labels": ["B-OP_CODE", "I-OP_CODE"],
+    "type": "code",
+    "target": "operation.code"
+  },
+
+  "blood_pressure_sys": {
+    "labels": ["B-BP_SYS", "I-BP_SYS"],
+    "type": "integer",
+    "target": "vitals.bp_systolic"
+  },
+
+  "blood_pressure_dia": {
+    "labels": ["B-BP_DIA", "I-BP_DIA"],
+    "type": "integer",
+    "target": "vitals.bp_diastolic"
+  },
+
+  "heart_rate": {
+    "labels": ["B-HR", "I-HR"],
+    "type": "integer",
+    "target": "vitals.heart_rate"
+  },
+
+  "spo2": {
+    "labels": ["B-SPO2", "I-SPO2"],
+    "type": "integer",
+    "target": "vitals.spo2"
+  },
+
+  "anesthesia_type": {
+    "labels": ["B-ANES_TYPE", "I-ANES_TYPE"],
+    "type": "categorical",
+    "values": ["general", "spinal", "epidural", "local", "regional"],
+    "target": "anesthesia.type"
+  },
+
+  "position": {
+    "labels": ["B-POSITION", "I-POSITION"],
+    "type": "categorical",
+    "values": ["supine", "prone", "lithotomy", "lateral"],
+    "target": "position"
+  },
+
+  "device": {
+    "labels": ["B-DEVICE", "I-DEVICE"],
+    "type": "boolean_multi",
+    "target": "devices"
+  },
+
+  "specimen": {
+    "labels": ["B-SPECIMEN", "I-SPECIMEN"],
+    "type": "categorical_multi",
+    "values": ["pathology", "culture", "cytology", "csf"],
+    "target": "specimen.type"
+  },
+
+  "condition": {
+    "labels": ["B-CONDITION", "I-CONDITION"],
+    "type": "categorical",
+    "values": ["stable", "fair", "intubated", "extubated"],
+    "target": "condition_post_op"
+  },
+
+  "drug": {
+    "labels": ["B-DRUG", "I-DRUG"],
+    "type": "text",
+    "target": "medications[].name"
+  },
+
+  "dose": {
+    "labels": ["B-DOSE", "I-DOSE"],
+    "type": "float",
+    "target": "medications[].dose"
+  },
+
+  "unit": {
+    "labels": ["B-UNIT", "I-UNIT"],
+    "type": "text",
+    "target": "medications[].unit"
+  }
+}
