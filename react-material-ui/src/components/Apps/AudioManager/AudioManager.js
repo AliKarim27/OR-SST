@@ -10,13 +10,63 @@ import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MicIcon from '@mui/icons-material/Mic';
 import StopIcon from '@mui/icons-material/Stop';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+
+// Recording visualizer styles (colors will be injected dynamically)
+const visualizerStyles = `
+  @keyframes barBounce {
+    0%, 100% { height: 4px; }
+    50% { height: 24px; }
+  }
+  
+  .recording-visualizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 40px;
+    padding: 8px;
+  }
+  
+  .visualizer-bar {
+    width: 3px;
+    border-radius: 2px;
+    animation: barBounce 0.6s ease-in-out infinite;
+  }
+`;
 
 const API_BASE = "http://localhost:8000/api";
+
+// Hide audio player controls via CSS
+const playerStyles = `
+  .minimal-player .rhap_volume-button,
+  .minimal-player .rhap_volume-container,
+  .minimal-player .rhap_additional-controls,
+  .minimal-player .rhap_loop-button,
+  .minimal-player .rhap_skip-button,
+  .minimal-player .rhap_time-loop-button,
+  .minimal-player .rhap_repeat-button,
+  .minimal-player .rhap_download-progress {
+    display: none !important;
+  }
+  
+  /* Make the player fill its container */
+  .minimal-player .rhap_container {
+    width: 100% !important;
+    padding: 4px 8px !important;
+  }
+  
+  .minimal-player .rhap_progress-container {
+    flex: 1;
+  }
+`;
 
 function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
@@ -36,6 +86,81 @@ function readFileAsBlob(file) {
   });
 }
 
+// Recording Visualizer Component
+const RecordingVisualizer = ({ isRecording, mediaRecorder }) => {
+  const theme = useTheme();
+  const [barHeights, setBarHeights] = useState(Array(12).fill(0.3));
+  const analyserRef = useRef(null);
+  const animationIdRef = useRef(null);
+
+  useEffect(() => {
+    if (!isRecording) {
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+      return;
+    }
+
+    const animate = () => {
+      if (analyserRef.current) {
+        const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+        analyserRef.current.getByteFrequencyData(dataArray);
+        
+        const newHeights = Array(12).fill(0).map((_, i) => {
+          const index = Math.floor((i / 12) * dataArray.length);
+          return Math.min(1, (dataArray[index] / 255) * 1.5);
+        });
+        setBarHeights(newHeights);
+      }
+      animationIdRef.current = requestAnimationFrame(animate);
+    };
+
+    animationIdRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+    };
+  }, [isRecording]);
+
+  useEffect(() => {
+    if (isRecording && mediaRecorder?.stream) {
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
+        const source = audioContext.createMediaStreamAudioSource(mediaRecorder.stream);
+        source.connect(analyser);
+        analyserRef.current = analyser;
+      } catch (e) {
+        console.error("Could not setup visualizer:", e);
+      }
+    }
+  }, [isRecording, mediaRecorder]);
+
+  // Create gradient using theme colors
+  const primaryColor = theme.palette.primary.main; // #605DFF
+  const accentColor = theme.palette.primary[600]; // #1f64f1
+  const barGradient = `linear-gradient(180deg, ${accentColor}, ${primaryColor})`;
+
+  return (
+    <Box className="recording-visualizer">
+      {barHeights.map((height, i) => (
+        <div
+          key={i}
+          className="visualizer-bar"
+          style={{
+            height: `${Math.max(4, height * 24)}px`,
+            background: barGradient,
+            animationDelay: `${i * 0.05}s`,
+          }}
+        />
+      ))}
+    </Box>
+  );
+}
+
 const AudioManager = () => {
   const [audios, setAudios] = useState([]);
   const [localAudios, setLocalAudios] = useState([]);
@@ -46,6 +171,14 @@ const AudioManager = () => {
   const [error, setError] = useState("");
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
+
+  // Inject CSS to hide extra controls
+  useEffect(() => {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = playerStyles + visualizerStyles;
+    document.head.appendChild(styleElement);
+    return () => document.head.removeChild(styleElement);
+  }, []);
 
   // Fetch saved audios from backend on mount
   useEffect(() => {
@@ -59,7 +192,12 @@ const AudioManager = () => {
       const res = await fetch(`${API_BASE}/list_audio/`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setAudios(data.list || []);
+      // Convert relative URLs to absolute URLs
+      const audiosWithAbsoluteUrls = (data.list || []).map(audio => ({
+        ...audio,
+        url: audio.url.startsWith('http') ? audio.url : `${API_BASE}${audio.url}`
+      }));
+      setAudios(audiosWithAbsoluteUrls);
     } catch (e) {
       console.error("Failed to fetch audios", e);
       setError(`Failed to load server audios: ${e.message}`);
@@ -162,6 +300,31 @@ const AudioManager = () => {
     setLocalAudios((s) => s.filter((a) => a.id !== id));
   };
 
+  const deleteAudioFromServer = async (audioName) => {
+    try {
+      setError("");
+      setSavingId(audioName);
+      const res = await fetch(`${API_BASE}/delete_audio/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ filename: audioName }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
+      // Remove from list and fetch updated audios
+      setAudios((s) => s.filter((a) => a.name !== audioName));
+      await fetchServerAudios();
+    } catch (e) {
+      console.error("Failed to delete audio", e);
+      setError(`Failed to delete audio: ${e.message}`);
+    } finally {
+      setSavingId(null);
+    }
+  };
+
   return (
     <Paper style={{ padding: 16 }}>
       <Typography variant="h5" gutterBottom>
@@ -195,6 +358,13 @@ const AudioManager = () => {
         )}
       </div>
 
+      {/* Recording Visualizer */}
+      {recording && (
+        <Box style={{ marginBottom: 16, border: "1px solid #ccc", borderRadius: 4, backgroundColor: "#f5f5f5" }}>
+          <RecordingVisualizer isRecording={recording} mediaRecorder={mediaRecorderRef.current} />
+        </Box>
+      )}
+
       {/* Local Unsaved Audios */}
       {localAudios.length > 0 && (
         <Box style={{ marginBottom: 24 }}>
@@ -220,7 +390,27 @@ const AudioManager = () => {
                 </Box>
               }>
                 <ListItemText primary={a.name} secondary={new Date(a.createdAt).toLocaleString()} />
-                <audio controls src={a.dataUrl} style={{ marginLeft: 12, width: 250 }} />
+                <Box style={{ marginLeft: 12, width: 350, flex: 'none', overflow: 'visible', display: 'flex', alignItems: 'center', gap: '8px' }} className="minimal-player">
+                  <AudioPlayer
+                    src={a.dataUrl}
+                    onError={(e) => console.log("Error:", e)}
+                    layout="horizontal"
+                    showVolumeControl={false}
+                    showSkipControls={false}
+                    showLoopControl={false}
+                    showDownloadProgress={false}
+                    style={{
+                      boxShadow: 'none',
+                      backgroundColor: '#ECF0FF',
+                      borderRadius: '4px',
+                      padding: '2px',
+                      width: '100%',
+                      fontSize: '12px',
+                      transform: 'scale(0.75)',
+                      transformOrigin: 'left center'
+                    }}
+                  />
+                </Box>
               </ListItem>
             ))}
           </List>
@@ -241,12 +431,32 @@ const AudioManager = () => {
         <List>
           {audios.map((a) => (
             <ListItem key={a.name} divider secondaryAction={
-              <IconButton edge="end" aria-label="delete" disabled>
+              <IconButton edge="end" aria-label="delete" onClick={() => deleteAudioFromServer(a.name)} disabled={savingId !== null}>
                 <DeleteIcon />
               </IconButton>
             }>
               <ListItemText primary={a.name} secondary={`URL: ${a.url}`} />
-              <audio controls src={a.url} style={{ marginLeft: 12, width: 250 }} />
+              <Box style={{ marginLeft: 12, width: 350, flex: 'none', overflow: 'visible', display: 'flex', alignItems: 'center', gap: '8px' }} className="minimal-player">
+                <AudioPlayer
+                  src={a.url}
+                  onError={(e) => console.log("Error:", e)}
+                  layout="horizontal"
+                  showVolumeControl={false}
+                  showSkipControls={false}
+                  showLoopControl={false}
+                  showDownloadProgress={false}
+                  style={{
+                    boxShadow: 'none',
+                    backgroundColor: '#ECF0FF',
+                    borderRadius: '4px',
+                    padding: '2px',
+                    width: '100%',
+                    fontSize: '12px',
+                    transform: 'scale(0.75)',
+                    transformOrigin: 'left center'
+                  }}
+                />
+              </Box>
             </ListItem>
           ))}
         </List>

@@ -41,6 +41,18 @@ const LeftSidebarMenu = ({ toggleActive }) => {
                 Audio Management
               </Typography>
             </Link>
+
+            <Link
+              to="/apps/stt-model-settings"
+              className={`sidebar-menu-link ${isActiveLink(
+                "/apps/stt-model-settings"
+              )}`}
+            >
+              <i className="material-symbols-outlined">settings</i>
+              <Typography component={"span"} className="title">
+                STT Model Settings
+              </Typography>
+            </Link>
           </Box>
         </Box>
       </Box>

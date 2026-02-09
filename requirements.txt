@@ -1,4 +1,3 @@
-gradio==4.44.0
 numpy
 librosa
 torch
@@ -10,4 +9,3 @@ faster-whisper
 openai-whisper
 pydantic
 python-dateutil
-streamlit

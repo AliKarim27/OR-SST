@@ -31,6 +31,10 @@ LABELS_PATH = LABELS_DIR / 'train.jsonl'
 # Lazy imports for heavy models
 _stt = None
 _extractor = None
+_current_stt_model = 'base'  # Track current model
+
+# Available Whisper models
+AVAILABLE_STT_MODELS = ['tiny', 'base', 'small', 'medium', 'large']
 
 
 def _ensure_mono(y: np.ndarray) -> np.ndarray:
@@ -45,7 +49,7 @@ def _load_stt():
         try:
             from stt.stt_whisper import STT
 
-            _stt = STT(model_name='base', device='cpu', compute_type='int8')
+            _stt = STT(model_name=_current_stt_model, device='cpu', compute_type='int8')
         except Exception as e:
             logging.exception('Failed to load STT model')
             raise
@@ -223,7 +227,7 @@ def list_audio(request):
             return JsonResponse({'list': []})
         files = [p.name for p in sorted(audio_dir.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True) if p.is_file()]
         # Provide a URL pointing to the get_audio endpoint
-        result = [{'name': n, 'url': f"/api/get_audio/?name={n}"} for n in files]
+        result = [{'name': n, 'url': f"/get_audio/?name={n}"} for n in files]
         return JsonResponse({'list': result})
     except Exception as e:
         tb = traceback.format_exc()
@@ -244,5 +248,99 @@ def get_audio(request):
     except Exception as e:
         tb = traceback.format_exc()
         logging.error('get_audio failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+@csrf_exempt
+def delete_audio(request):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=405)
+    try:
+        payload = json.loads(request.body.decode('utf-8') or '{}')
+        filename = payload.get('filename')
+        if not filename:
+            return JsonResponse({'error': 'filename required'}, status=400)
+        audio_path = PROJECT_ROOT / 'data' / 'audio' / filename
+        if not audio_path.exists() or not audio_path.is_file():
+            return JsonResponse({'error': 'not found'}, status=404)
+        audio_path.unlink()
+        return JsonResponse({'status': 'deleted', 'name': filename})
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('delete_audio failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+# --- STT Model endpoints ---
+def get_stt_models(request):
+    """Get available STT models and current model"""
+    try:
+        return JsonResponse({
+            'available_models': AVAILABLE_STT_MODELS,
+            'current_model': _current_stt_model
+        })
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('get_stt_models failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+@csrf_exempt
+def set_stt_model(request):
+    """Set the STT model to use for transcription"""
+    global _stt, _current_stt_model
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=405)
+    try:
+        payload = json.loads(request.body.decode('utf-8') or '{}')
+        model_name = payload.get('model_name', '').strip()
+        
+        if not model_name:
+            return JsonResponse({'error': 'model_name required'}, status=400)
+        
+        if model_name not in AVAILABLE_STT_MODELS:
+            return JsonResponse({
+                'error': f'Invalid model. Available models: {", ".join(AVAILABLE_STT_MODELS)}'
+            }, status=400)
+        
+        # Update current model and reload STT
+        _current_stt_model = model_name
+        _stt = None  # Force reload with new model
+        
+        return JsonResponse({
+            'status': f'STT model changed to {model_name}',
+            'current_model': _current_stt_model
+        })
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('set_stt_model failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+@csrf_exempt
+def get_stt_info(request):
+    """Get current STT model info and available models"""
+    try:
+        available_models = ['tiny', 'base', 'small', 'medium', 'large']
+        stt = _load_stt()
+        current_model = 'base'  # default model name
+        
+        model_info = {
+            'available_models': available_models,
+            'current_model': current_model,
+            'device': 'cpu',
+            'compute_type': 'int8',
+            'model_details': {
+                'tiny': {'size': '39M', 'speed': 'Very Fast', 'accuracy': 'Good'},
+                'base': {'size': '74M', 'speed': 'Fast', 'accuracy': 'Very Good'},
+                'small': {'size': '244M', 'speed': 'Medium', 'accuracy': 'Excellent'},
+                'medium': {'size': '769M', 'speed': 'Slow', 'accuracy': 'Excellent'},
+                'large': {'size': '1.5B', 'speed': 'Very Slow', 'accuracy': 'Best'},
+            }
+        }
+        return JsonResponse(model_info)
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('get_stt_info failed: %s', tb)
         return JsonResponse({'error': str(e), 'trace': tb}, status=500)
 

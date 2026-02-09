@@ -7,6 +7,7 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 
 // Audio Management
 import AudioManagement from "./pages/apps/AudioManagement";
+import STTModelSettingsPage from "./pages/apps/STTModelSettings";
 import BlankPage from "./pages/BlankPage";
 
 const App = () => {
@@ -44,6 +45,9 @@ const App = () => {
             <Routes>
               {/* Audio Management */}
               <Route path="/apps/audio-management" element={<AudioManagement />} />
+              
+              {/* STT Model Settings */}
+              <Route path="/apps/stt-model-settings" element={<STTModelSettingsPage />} />
               
               {/* Home/Default */}
               <Route path="/" element={<BlankPage />} />
