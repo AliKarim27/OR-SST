@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Pagination from '@mui/material/Pagination';
 import { useTheme } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MicIcon from '@mui/icons-material/Mic';
@@ -74,15 +75,6 @@ function readFileAsDataUrl(file) {
     reader.onload = () => resolve(reader.result);
     reader.onerror = (e) => reject(e);
     reader.readAsDataURL(file);
-  });
-}
-
-function readFileAsBlob(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(new Blob([reader.result], { type: file.type }));
-    reader.onerror = (e) => reject(e);
-    reader.readAsArrayBuffer(file);
   });
 }
 
@@ -162,6 +154,7 @@ const RecordingVisualizer = ({ isRecording, mediaRecorder }) => {
 }
 
 const AudioManager = () => {
+  const theme = useTheme();
   const [audios, setAudios] = useState([]);
   const [localAudios, setLocalAudios] = useState([]);
   const [name, setName] = useState("");
@@ -169,6 +162,8 @@ const AudioManager = () => {
   const [loading, setLoading] = useState(true);
   const [savingId, setSavingId] = useState(null);
   const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState({ total: 0, total_pages: 0, current_page: 1, page_size: 5 });
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
 
@@ -180,16 +175,17 @@ const AudioManager = () => {
     return () => document.head.removeChild(styleElement);
   }, []);
 
-  // Fetch saved audios from backend on mount
+  // Fetch saved audios from backend on mount and when page changes
   useEffect(() => {
     fetchServerAudios();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const fetchServerAudios = async () => {
     try {
       setLoading(true);
       setError("");
-      const res = await fetch(`${API_BASE}/list_audio/`);
+      const res = await fetch(`${API_BASE}/list_audio/?page=${page}&page_size=5`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       // Convert relative URLs to absolute URLs
@@ -198,12 +194,17 @@ const AudioManager = () => {
         url: audio.url.startsWith('http') ? audio.url : `${API_BASE}${audio.url}`
       }));
       setAudios(audiosWithAbsoluteUrls);
+      setPagination(data.pagination || { total: 0, total_pages: 0, current_page: page, page_size: 5 });
     } catch (e) {
       console.error("Failed to fetch audios", e);
       setError(`Failed to load server audios: ${e.message}`);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
 
   const startRecording = async () => {
@@ -283,7 +284,7 @@ const AudioManager = () => {
       });
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
+      await res.json();
 
       // Remove from local, fetch updated list from server
       setLocalAudios((s) => s.filter((a) => a.id !== audioId));
@@ -401,7 +402,7 @@ const AudioManager = () => {
                     showDownloadProgress={false}
                     style={{
                       boxShadow: 'none',
-                      backgroundColor: '#ECF0FF',
+                      backgroundColor: '#ffffff',
                       borderRadius: '4px',
                       padding: '2px',
                       width: '100%',
@@ -420,7 +421,7 @@ const AudioManager = () => {
       {/* Server Saved Audios */}
       <Box>
         <Typography variant="subtitle1" gutterBottom>
-          ☁️ Saved Audios ({audios.length})
+          ☁️ Saved Audios ({pagination.total})
         </Typography>
         {loading && <CircularProgress />}
         {!loading && audios.length === 0 && (
@@ -439,27 +440,50 @@ const AudioManager = () => {
               <Box style={{ marginLeft: 12, width: 350, flex: 'none', overflow: 'visible', display: 'flex', alignItems: 'center', gap: '8px' }} className="minimal-player">
                 <AudioPlayer
                   src={a.url}
-                  onError={(e) => console.log("Error:", e)}
+                  onError={(e) => {
+                    console.error("AudioPlayer Error for", a.name, ":", e);
+                    console.error("URL:", a.url);
+                  }}
+                  onLoadStart={() => console.log("Loading audio:", a.name, a.url)}
                   layout="horizontal"
                   showVolumeControl={false}
                   showSkipControls={false}
                   showLoopControl={false}
                   showDownloadProgress={false}
+                  customProgressBarSection={[
+                    'CURRENT_TIME',
+                    'PROGRESS_BAR',
+                    'DURATION',
+                  ]}
                   style={{
                     boxShadow: 'none',
-                    backgroundColor: '#ECF0FF',
+                    backgroundColor: theme.palette.background.paper,
                     borderRadius: '4px',
                     padding: '2px',
                     width: '100%',
                     fontSize: '12px',
                     transform: 'scale(0.75)',
-                    transformOrigin: 'left center'
+                    transformOrigin: 'left center',
+                    '--rhap_theme-color': theme.palette.primary.main,
+                    '--rhap_bar-color': theme.palette.primary.main,
                   }}
                 />
               </Box>
             </ListItem>
           ))}
         </List>
+        {pagination.total_pages > 1 && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Pagination 
+              count={pagination.total_pages} 
+              page={page} 
+              onChange={handlePageChange}
+              color="primary"
+              showFirstButton
+              showLastButton
+            />
+          </Box>
+        )}
       </Box>
     </Paper>
   );

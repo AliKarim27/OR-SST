@@ -8,6 +8,14 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 // Audio Management
 import AudioManagement from "./pages/apps/AudioManagement";
 import STTModelSettingsPage from "./pages/apps/STTModelSettings";
+import STTTesterPage from "./pages/apps/STTTester";
+
+// NER Management
+import NEROverview from "./pages/apps/NEROverview";
+import NERModelManagement from "./pages/apps/NERModelManagement";
+import NERTraining from "./pages/apps/NERTraining";
+import NERDataManagement from "./pages/apps/NERDataManagement";
+
 import BlankPage from "./pages/BlankPage";
 
 const App = () => {
@@ -48,6 +56,15 @@ const App = () => {
               
               {/* STT Model Settings */}
               <Route path="/apps/stt-model-settings" element={<STTModelSettingsPage />} />
+              
+              {/* STT Tester */}
+              <Route path="/apps/stt-tester" element={<STTTesterPage />} />
+              
+              {/* NER Management */}
+              <Route path="/apps/ner-overview" element={<NEROverview />} />
+              <Route path="/apps/ner-model-management" element={<NERModelManagement />} />
+              <Route path="/apps/ner-training" element={<NERTraining />} />
+              <Route path="/apps/ner-data-management" element={<NERDataManagement />} />
               
               {/* Home/Default */}
               <Route path="/" element={<BlankPage />} />

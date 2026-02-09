@@ -18,7 +18,7 @@
 {"tokens": ["foley", "catheter", "with", "irrigation"], "tags": ["B-DEVICE", "I-DEVICE", "O", "I-DEVICE"]}
 {"tokens": ["hemovac", "drain", "inserted"], "tags": ["B-DEVICE", "I-DEVICE", "O"]}
 {"tokens": ["specimen", "sent", "to", "pathology"], "tags": ["O", "O", "O", "B-SPECIMEN"]}
-{"tokens":["surgeon","one","dr","ali","krayem"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
-{"tokens":["surgeon","two","dr","mohammad","farhat"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
-{"tokens":["first","surgeon","doctor","ali","krayem"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
-{"tokens":["second","surgeon","doctor","mohammad","farhat"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
+{"tokens": ["surgeon", "one", "dr", "ali", "krayem"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["surgeon", "two", "dr", "mohammad", "farhat"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["first", "surgeon", "doctor", "ali", "krayem"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["second", "surgeon", "doctor", "mohammad", "farhat"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
