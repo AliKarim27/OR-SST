@@ -134,8 +134,7 @@ Frontend dependencies live in `react-material-ui/package.json`.
 
 ## License
 
-[Add your license here]
 
 ## Contact
 
-[Add contact information]
+ali.karim.2@outlook.com
