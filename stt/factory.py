@@ -152,6 +152,14 @@ def _register_implementations():
         STTFactory.register('faster-whisper', FasterWhisperSTT)
     except ImportError as e:
         logging.warning(f"Could not register Faster-Whisper: {e}")
+
+    # Register Wav2Vec2
+    try:
+        from .stt_wav2vec import Wav2Vec2STT
+        STTFactory.register('wav2vec2', Wav2Vec2STT)
+        STTFactory.register('wav2vec', Wav2Vec2STT)
+    except ImportError as e:
+        logging.warning(f"Could not register Wav2Vec2: {e}")
     
     # Future: Register other STT implementations here
     # try:
