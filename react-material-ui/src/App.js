@@ -18,6 +18,9 @@ import NERDataManagement from "./pages/apps/NERDataManagement";
 import NERTesterPage from "./pages/apps/NERTester";
 import EntityTypesPage from "./pages/apps/EntityTypes";
 
+// Workflow
+import WorkflowPage from "./pages/apps/Workflow";
+
 import BlankPage from "./pages/BlankPage";
 
 const App = () => {
@@ -53,6 +56,9 @@ const App = () => {
             <ScrollToTop />
 
             <Routes>
+              {/* Workflow */}
+              <Route path="/apps/workflow" element={<WorkflowPage />} />
+              
               {/* Audio Management */}
               <Route path="/apps/audio-management" element={<AudioManagement />} />
               

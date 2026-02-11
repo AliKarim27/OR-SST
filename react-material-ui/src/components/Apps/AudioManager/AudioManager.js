@@ -11,12 +11,14 @@ import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
+import InputAdornment from '@mui/material/InputAdornment';
 import { useTheme } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MicIcon from '@mui/icons-material/Mic';
 import StopIcon from '@mui/icons-material/Stop';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import SearchIcon from '@mui/icons-material/Search';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
@@ -164,6 +166,7 @@ const AudioManager = () => {
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState({ total: 0, total_pages: 0, current_page: 1, page_size: 5 });
+  const [searchQuery, setSearchQuery] = useState("");
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
 
@@ -326,6 +329,20 @@ const AudioManager = () => {
     }
   };
 
+  // Filter audios based on search query
+  const filteredLocalAudios = localAudios.filter(audio =>
+    audio.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredServerAudios = audios.filter(audio =>
+    audio.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    setPage(1); // Reset to first page when searching
+  };
+
   return (
     <Paper style={{ padding: 16 }}>
       <Typography variant="h5" gutterBottom>
@@ -333,6 +350,25 @@ const AudioManager = () => {
       </Typography>
 
       {error && <Alert severity="error" onClose={() => setError("")} style={{ marginBottom: 12 }}>{error}</Alert>}
+
+      {/* Search Bar */}
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          size="small"
+          placeholder="Search audio files by name..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
 
       <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12, flexWrap: "wrap" }}>
         <TextField label="Name" size="small" value={name} onChange={(e) => setName(e.target.value)} />
@@ -367,13 +403,13 @@ const AudioManager = () => {
       )}
 
       {/* Local Unsaved Audios */}
-      {localAudios.length > 0 && (
+      {filteredLocalAudios.length > 0 && (
         <Box style={{ marginBottom: 24 }}>
           <Typography variant="subtitle1" gutterBottom>
-            📝 Local Audios ({localAudios.length}) - Not yet saved
+            📝 Local Audios ({searchQuery ? `${filteredLocalAudios.length} of ${localAudios.length}` : localAudios.length}) - Not yet saved
           </Typography>
           <List>
-            {localAudios.map((a) => (
+            {filteredLocalAudios.map((a) => (
               <ListItem key={a.id} divider secondaryAction={
                 <Box style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <Button
@@ -421,7 +457,7 @@ const AudioManager = () => {
       {/* Server Saved Audios */}
       <Box>
         <Typography variant="subtitle1" gutterBottom>
-          ☁️ Saved Audios ({pagination.total})
+          ☁️ Saved Audios ({searchQuery ? `${filteredServerAudios.length} of ${pagination.total}` : pagination.total})
         </Typography>
         {loading && <CircularProgress />}
         {!loading && audios.length === 0 && (
@@ -429,8 +465,16 @@ const AudioManager = () => {
             No audios saved yet. Record or upload and save to server.
           </Typography>
         )}
+        {!loading && audios.length > 0 && filteredServerAudios.length === 0 && (
+          <Box sx={{ py: 4, textAlign: 'center' }}>
+            <SearchIcon sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }} />
+            <Typography color="text.secondary">
+              No audio files match your search "{searchQuery}"
+            </Typography>
+          </Box>
+        )}
         <List>
-          {audios.map((a) => (
+          {filteredServerAudios.map((a) => (
             <ListItem key={a.name} divider secondaryAction={
               <IconButton edge="end" aria-label="delete" onClick={() => deleteAudioFromServer(a.name)} disabled={savingId !== null}>
                 <DeleteIcon />

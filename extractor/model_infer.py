@@ -3,7 +3,7 @@ Slot Filling Extractor - Named Entity Recognition model for OR-SST project.
 Inherits from BaseNER to provide token-level entity extraction from medical transcripts.
 """
 import logging
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 
 from .base_ner import BaseNER, NERConfig
@@ -31,8 +31,20 @@ class SlotFillingExtractor(BaseNER):
         self.pipe = None
         
         try:
+            self.logger.info(f"Loading tokenizer from {config.model_dir}")
             self.tokenizer = AutoTokenizer.from_pretrained(config.model_dir)
-            self.model = AutoModelForTokenClassification.from_pretrained(config.model_dir)
+            self.logger.info("Tokenizer loaded successfully")
+            
+            self.logger.info(f"Loading model from {config.model_dir} with memory optimization")
+            # Use low_cpu_mem_usage to reduce memory footprint during loading
+            self.model = AutoModelForTokenClassification.from_pretrained(
+                config.model_dir,
+                low_cpu_mem_usage=True,  # Load weights progressively to reduce memory spikes
+                local_files_only=True     # Don't attempt to download, only use local files
+            )
+            self.logger.info("Model loaded successfully")
+            
+            self.logger.info(f"Creating pipeline with aggregation_strategy={config.aggregation_strategy}, device={config.device}")
             self.pipe = pipeline(
                 "token-classification",
                 model=self.model,
@@ -40,10 +52,12 @@ class SlotFillingExtractor(BaseNER):
                 aggregation_strategy=config.aggregation_strategy,
                 device=0 if config.device == "cuda" else -1  # -1 for CPU
             )
-            self.logger.info(f"SlotFillingExtractor initialized with model from {config.model_dir}")
+            self.logger.info(f"SlotFillingExtractor initialized successfully with model from {config.model_dir}")
         except Exception as e:
-            self.logger.error(f"Failed to initialize SlotFillingExtractor: {str(e)}")
+            self.logger.error(f"Failed to initialize SlotFillingExtractor: {str(e)}", exc_info=True)
             self.pipe = None
+            self.model = None
+            self.tokenizer = None
     
     def extract(self, transcript: str) -> dict:
         """
@@ -60,11 +74,74 @@ class SlotFillingExtractor(BaseNER):
             return {}
         
         try:
-            entities = self.pipe(transcript)
-            return decode_entities_to_json(entities, transcript)
+            raw_entities = self.pipe(transcript)
+            # Post-process to merge any remaining subword tokens
+            merged_entities = self._merge_subword_tokens(raw_entities, transcript)
+            return decode_entities_to_json(merged_entities, transcript)
         except Exception as e:
             self.logger.error(f"Error during extraction: {str(e)}")
             return {}
+    
+    def _merge_subword_tokens(self, entities: List[Dict], text: str) -> List[Dict]:
+        """
+        Merge WordPiece subword tokens (##) into complete words.
+        This handles cases where aggregation_strategy doesn't fully merge tokens.
+        
+        Args:
+            entities: List of entity dictionaries from pipeline
+            text: Original input text
+        
+        Returns:
+            List of merged entity dictionaries
+        """
+        if not entities:
+            return []
+        
+        merged = []
+        buffer = None
+        
+        for entity in entities:
+            word = entity.get('word', '')
+            
+            # Check if this is a subword continuation token
+            is_subword = word.startswith('##')
+            
+            if is_subword and buffer:
+                # Merge with previous token - remove ## prefix
+                buffer['word'] += word.replace('##', '')
+                buffer['end'] = entity['end']
+                # Update score (take maximum confidence)
+                buffer['score'] = max(buffer['score'], entity['score'])
+            elif not is_subword and buffer:
+                # Check if same entity type and adjacent positions
+                same_entity = buffer.get('entity') == entity.get('entity') or buffer.get('entity_group') == entity.get('entity_group')
+                # Consider adjacent if positions are close (within 2 chars for spaces/punctuation)
+                is_adjacent = (entity['start'] - buffer['end']) <= 2
+                
+                if same_entity and is_adjacent:
+                    # Merge adjacent words of same entity type
+                    # Include any text between (e.g., spaces, punctuation)
+                    between_text = text[buffer['end']:entity['start']]
+                    buffer['word'] += between_text + entity['word']
+                    buffer['end'] = entity['end']
+                    # Average the scores
+                    buffer['score'] = (buffer['score'] + entity['score']) / 2
+                else:
+                    # Different entity or not adjacent - save buffer and start new
+                    merged.append(buffer)
+                    buffer = entity.copy()
+            else:
+                # Save previous buffer if exists
+                if buffer:
+                    merged.append(buffer)
+                # Start new buffer
+                buffer = entity.copy()
+        
+        # Don't forget the last buffer
+        if buffer:
+            merged.append(buffer)
+        
+        return merged
     
     def is_available(self) -> bool:
         """

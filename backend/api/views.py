@@ -119,19 +119,40 @@ def _load_extractor():
     global _extractor
     if _extractor is None:
         try:
-            if MODEL_DIR.exists() and MODEL_DIR.is_dir():
-                from extractor.model_infer import SlotFillingExtractor
-                from extractor.base_ner import NERConfig
+            if not MODEL_DIR.exists() or not MODEL_DIR.is_dir():
+                logging.error(f'Model directory does not exist: {MODEL_DIR}')
+                return None
+            
+            # Check for required model files
+            required_files = ['config.json', 'model.safetensors', 'tokenizer.json', 'vocab.txt']
+            missing_files = [f for f in required_files if not (MODEL_DIR / f).exists()]
+            if missing_files:
+                logging.error(f'Model directory missing required files: {missing_files}')
+                return None
+                
+            from extractor.model_infer import SlotFillingExtractor
+            from extractor.base_ner import NERConfig
 
-                config = NERConfig(
-                    model_type="slot-filling",
-                    model_dir=str(MODEL_DIR),
-                    device="cpu"
-                )
-                _extractor = SlotFillingExtractor(config)
-        except Exception:
-            logging.exception('Failed to load extractor model')
-            raise
+            config = NERConfig(
+                model_type="slot-filling",
+                model_dir=str(MODEL_DIR),
+                device="cpu"
+            )
+            
+            logging.info(f'Attempting to initialize SlotFillingExtractor from {MODEL_DIR}')
+            _extractor = SlotFillingExtractor(config)
+            
+            if _extractor and not _extractor.is_available():
+                logging.error('Extractor created but not available (model/pipeline/tokenizer failed to load)')
+                logging.error(f'pipe={_extractor.pipe}, model={_extractor.model}, tokenizer={_extractor.tokenizer}')
+                _extractor = None
+            else:
+                logging.info(f'Extractor loaded successfully from {MODEL_DIR}')
+                
+        except Exception as e:
+            logging.exception(f'Failed to load extractor model: {e}')
+            _extractor = None
+            
     return _extractor
 
 
@@ -785,6 +806,10 @@ def ner_extract(request):
                 raw_entities = extractor.predict_raw(text)
             elif hasattr(extractor, 'pipe') and extractor.pipe is not None:
                 raw_entities = extractor.pipe(text)
+            
+            # Merge subword tokens using the extractor's merge function
+            if raw_entities and hasattr(extractor, '_merge_subword_tokens'):
+                raw_entities = extractor._merge_subword_tokens(raw_entities, text)
             
             # Convert numpy types to native Python types for JSON serialization
             if raw_entities:

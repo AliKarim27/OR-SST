@@ -27,11 +27,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TablePagination,
   Select,
   MenuItem,
   FormControl,
   Snackbar,
-  IconButton,
+  Autocomplete,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -42,8 +43,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import NERApiService from '../../../services/nerApi';
-
-const API_BASE = "http://localhost:8000/api";
 
 // Default fallback color
 const DEFAULT_COLOR = '#9e9e9e';
@@ -65,10 +64,8 @@ const SAMPLE_TEXTS = [
 ];
 
 function NERTester() {
-  const theme = useTheme();
   const [tabValue, setTabValue] = useState(0);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [extracting, setExtracting] = useState(false);
   
   // Input text state
@@ -92,6 +89,12 @@ function NERTester() {
   const [availableTags, setAvailableTags] = useState([]);
   const [savingToTraining, setSavingToTraining] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  
+  // Pagination state for label editor and raw entities
+  const [labelEditorPage, setLabelEditorPage] = useState(0);
+  const [labelEditorRowsPerPage, setLabelEditorRowsPerPage] = useState(10);
+  const [rawEntitiesPage, setRawEntitiesPage] = useState(0);
+  const [rawEntitiesRowsPerPage, setRawEntitiesRowsPerPage] = useState(10);
 
   // Fetch entity types on mount
   useEffect(() => {
@@ -149,6 +152,8 @@ function NERTester() {
       setError("");
       setResult(null);
       setModelInfo(null);
+      setRawEntitiesPage(0);
+      setLabelEditorPage(0);
 
       const response = await NERApiService.extract(text.trim());
 
@@ -227,7 +232,16 @@ function NERTester() {
         });
         
         if (entity) {
-          tag = entity.entity;
+          // Extract entity type name (remove B- or I- prefix if present)
+          let entityType = entity.entity.replace(/^[BI]-/, '');
+          
+          // Determine if this is the beginning or inside of the entity
+          // Check if this token is at the start position of the entity
+          const isBeginning = position === entity.start || 
+                             (position < entity.start && position + token.length > entity.start);
+          
+          // Apply proper BIO tagging
+          tag = isBeginning ? `B-${entityType}` : `I-${entityType}`;
         }
       }
       
@@ -255,7 +269,26 @@ function NERTester() {
       const tokens = editableTokens.map(item => item.token);
       const tags = editableTokens.map(item => item.tag);
       
-      const response = await NERApiService.addTrainingEntry(tokens, tags);
+      // Validate that all tags are in the correct BIO format
+      const invalidTags = tags.filter(tag => {
+        if (tag === 'O') return false; // O is valid
+        if (tag.startsWith('B-') || tag.startsWith('I-')) return false; // Proper BIO tags are valid
+        return true; // Everything else is invalid
+      });
+      
+      if (invalidTags.length > 0) {
+        throw new Error(`Invalid tags detected: ${[...new Set(invalidTags)].join(', ')}. All entity tags must start with B- or I-`);
+      }
+      
+      // Validate against available tags
+      if (availableTags.length > 0) {
+        const unavailableTags = tags.filter(tag => !availableTags.includes(tag));
+        if (unavailableTags.length > 0) {
+          throw new Error(`Tags not in label map: ${[...new Set(unavailableTags)].join(', ')}. Available: ${availableTags.join(', ')}`);
+        }
+      }
+      
+      await NERApiService.addTrainingEntry(tokens, tags);
       
       setSnackbar({
         open: true,
@@ -280,6 +313,25 @@ function NERTester() {
   const handleCancelEdit = () => {
     setIsEditingLabels(false);
     setEditableTokens([]);
+    setLabelEditorPage(0);
+  };
+
+  const handleLabelEditorPageChange = (event, newPage) => {
+    setLabelEditorPage(newPage);
+  };
+
+  const handleLabelEditorRowsPerPageChange = (event) => {
+    setLabelEditorRowsPerPage(parseInt(event.target.value, 10));
+    setLabelEditorPage(0);
+  };
+
+  const handleRawEntitiesPageChange = (event, newPage) => {
+    setRawEntitiesPage(newPage);
+  };
+
+  const handleRawEntitiesRowsPerPageChange = (event) => {
+    setRawEntitiesRowsPerPage(parseInt(event.target.value, 10));
+    setRawEntitiesPage(0);
   };
 
   const renderEntityHighlight = () => {
@@ -344,10 +396,23 @@ function NERTester() {
     }
 
     const entities = result.entities;
-    if (Object.keys(entities).length === 0) {
+    const hasRawEntities = result.raw_entities && result.raw_entities.length > 0;
+    
+    // Show "no entities" message only if both structured AND raw entities are empty
+    if (Object.keys(entities).length === 0 && !hasRawEntities) {
       return (
         <Alert severity="info" sx={{ mt: 2 }}>
           No entities were extracted from the text. The model may need more training data.
+        </Alert>
+      );
+    }
+    
+    // If no structured entities but raw entities exist, show info message
+    if (Object.keys(entities).length === 0 && hasRawEntities) {
+      return (
+        <Alert severity="warning" sx={{ mt: 2 }}>
+          Model detected {hasRawEntities ? result.raw_entities.length : 0} entities, but post-processing returned no structured data. 
+          Check raw predictions below or edit labels to improve training data.
         </Alert>
       );
     }
@@ -395,6 +460,11 @@ function NERTester() {
       return null;
     }
 
+    // Paginate entities
+    const startIndex = rawEntitiesPage * rawEntitiesRowsPerPage;
+    const endIndex = startIndex + rawEntitiesRowsPerPage;
+    const paginatedEntities = result.raw_entities.slice(startIndex, endIndex);
+
     return (
       <Accordion sx={{ mt: 2 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -414,7 +484,7 @@ function NERTester() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {result.raw_entities.map((entity, idx) => (
+                {paginatedEntities.map((entity, idx) => (
                   <TableRow key={idx}>
                     <TableCell>
                       <Chip 
@@ -434,6 +504,15 @@ function NERTester() {
               </TableBody>
             </Table>
           </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={result.raw_entities.length}
+            rowsPerPage={rawEntitiesRowsPerPage}
+            page={rawEntitiesPage}
+            onPageChange={handleRawEntitiesPageChange}
+            onRowsPerPageChange={handleRawEntitiesRowsPerPageChange}
+          />
         </AccordionDetails>
       </Accordion>
     );
@@ -443,6 +522,11 @@ function NERTester() {
     if (!isEditingLabels || editableTokens.length === 0) {
       return null;
     }
+
+    // Paginate tokens
+    const startIndex = labelEditorPage * labelEditorRowsPerPage;
+    const endIndex = startIndex + labelEditorRowsPerPage;
+    const paginatedTokens = editableTokens.slice(startIndex, endIndex);
 
     return (
       <Paper sx={{ p: 3, mt: 3, border: 2, borderColor: 'primary.main' }}>
@@ -485,7 +569,7 @@ function NERTester() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {editableTokens.map((item) => (
+              {paginatedTokens.map((item) => (
                 <TableRow key={item.index}>
                   <TableCell>{item.index + 1}</TableCell>
                   <TableCell>
@@ -494,35 +578,56 @@ function NERTester() {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <FormControl size="small" fullWidth>
-                      <Select
-                        value={item.tag}
-                        onChange={(e) => handleTagChange(item.index, e.target.value)}
-                        sx={{
-                          minWidth: 150,
-                          bgcolor: item.tag !== 'O' ? getEntityColor(item.tag) : 'transparent',
-                          color: item.tag !== 'O' ? 'white' : 'inherit',
-                          '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: item.tag !== 'O' ? 'white' : undefined,
-                          },
-                          '& .MuiSvgIcon-root': {
-                            color: item.tag !== 'O' ? 'white' : undefined,
-                          }
-                        }}
-                      >
-                        {availableTags.map(tag => (
-                          <MenuItem key={tag} value={tag}>
-                            {tag}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+                    <Autocomplete
+                      size="small"
+                      value={item.tag}
+                      onChange={(event, newValue) => handleTagChange(item.index, newValue || 'O')}
+                      options={availableTags.length > 0 ? availableTags : ['O']}
+                      disableClearable
+                      sx={{ minWidth: 150 }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          placeholder="Search tag..."
+                          sx={{
+                            '& .MuiOutlinedInput-root': {
+                              bgcolor: item.tag !== 'O' ? getEntityColor(item.tag) : 'transparent',
+                              color: item.tag !== 'O' ? 'white' : 'inherit',
+                              '& fieldset': {
+                                borderColor: item.tag !== 'O' ? 'white' : undefined,
+                              },
+                              '&:hover fieldset': {
+                                borderColor: item.tag !== 'O' ? 'white' : undefined,
+                              },
+                              '&.Mui-focused fieldset': {
+                                borderColor: item.tag !== 'O' ? 'white' : 'primary.main',
+                              },
+                            },
+                            '& .MuiInputBase-input': {
+                              color: item.tag !== 'O' ? 'white !important' : 'inherit',
+                            },
+                            '& .MuiSvgIcon-root': {
+                              color: item.tag !== 'O' ? 'white' : undefined,
+                            },
+                          }}
+                        />
+                      )}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 20, 50]}
+          component="div"
+          count={editableTokens.length}
+          rowsPerPage={labelEditorRowsPerPage}
+          page={labelEditorPage}
+          onPageChange={handleLabelEditorPageChange}
+          onRowsPerPageChange={handleLabelEditorRowsPerPageChange}
+        />
 
         <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
           <Typography variant="caption" color="text.secondary">

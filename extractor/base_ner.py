@@ -24,7 +24,7 @@ class NERConfig:
     model_type: str = "slot-filling"
     model_dir: str = "models/slot_model"
     device: str = "cpu"
-    aggregation_strategy: str = "simple"
+    aggregation_strategy: str = "max"
     max_length: int = 512
     batch_size: int = 1
     confidence_threshold: float = 0.5

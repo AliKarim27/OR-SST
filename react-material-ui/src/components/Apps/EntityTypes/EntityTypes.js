@@ -23,6 +23,8 @@ import {
   Card,
   CardContent,
   Grid,
+  TablePagination,
+  InputAdornment,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
@@ -30,6 +32,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import LabelIcon from "@mui/icons-material/Label";
 import InfoIcon from "@mui/icons-material/Info";
+import SearchIcon from "@mui/icons-material/Search";
 import NERApiService from "../../../services/nerApi";
 
 const EntityTypes = () => {
@@ -40,6 +43,11 @@ const EntityTypes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  
+  // Search and pagination state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   
   // Dialog state
   const [addDialogOpen, setAddDialogOpen] = useState(false);
@@ -106,6 +114,32 @@ const EntityTypes = () => {
   const openDeleteDialog = (entityType) => {
     setEntityToDelete(entityType);
     setDeleteDialogOpen(true);
+  };
+
+  // Filter entity types based on search query
+  const filteredEntityTypes = entityTypes.filter(entityType =>
+    entityType.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    entityType.color.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Paginate filtered results
+  const paginatedEntityTypes = filteredEntityTypes.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    setPage(0); // Reset to first page when searching
   };
 
   // Clear messages after timeout
@@ -188,22 +222,40 @@ const EntityTypes = () => {
         </CardContent>
       </Card>
 
+      {/* Search Bar */}
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          placeholder="Search entity types by name or color..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
+
       {/* Statistics */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, textAlign: "center" }}>
             <Typography variant="h3" color="primary">
-              {entityTypes.length}
+              {searchQuery ? filteredEntityTypes.length : entityTypes.length}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Entity Types
+              {searchQuery ? 'Filtered ' : ''}Entity Types
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, textAlign: "center" }}>
             <Typography variant="h3" color="secondary">
-              {entityTypes.length * 2}
+              {(searchQuery ? filteredEntityTypes.length : entityTypes.length) * 2}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               BIO Tags (B- and I-)
@@ -213,7 +265,7 @@ const EntityTypes = () => {
         <Grid item xs={12} sm={4}>
           <Paper sx={{ p: 2, textAlign: "center" }}>
             <Typography variant="h3" color="success.main">
-              {entityTypes.length * 2 + 1}
+              {(searchQuery ? filteredEntityTypes.length : entityTypes.length) * 2 + 1}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Total Labels (incl. O)
@@ -250,8 +302,17 @@ const EntityTypes = () => {
                     </Typography>
                   </TableCell>
                 </TableRow>
+              ) : filteredEntityTypes.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={4} align="center" sx={{ py: 4 }}>
+                    <SearchIcon sx={{ fontSize: 48, color: "text.disabled", mb: 1 }} />
+                    <Typography color="text.secondary">
+                      No entity types match your search "{searchQuery}"
+                    </Typography>
+                  </TableCell>
+                </TableRow>
               ) : (
-                entityTypes.map((entityType) => (
+                paginatedEntityTypes.map((entityType) => (
                   <TableRow key={entityType.name} hover>
                     <TableCell>
                       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -305,6 +366,17 @@ const EntityTypes = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        {filteredEntityTypes.length > 0 && (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, 50]}
+            component="div"
+            count={filteredEntityTypes.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
 
       {/* Visual Legend */}
