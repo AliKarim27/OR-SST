@@ -588,13 +588,12 @@ function NERTester() {
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          placeholder="Search tag..."
+                          placeholder="Select tag..."
                           sx={{
                             '& .MuiOutlinedInput-root': {
                               bgcolor: item.tag !== 'O' ? getEntityColor(item.tag) : 'transparent',
-                              color: item.tag !== 'O' ? 'white' : 'inherit',
                               '& fieldset': {
-                                borderColor: item.tag !== 'O' ? 'white' : undefined,
+                                borderColor: item.tag !== 'O' ? 'rgba(255, 255, 255, 0.5)' : undefined,
                               },
                               '&:hover fieldset': {
                                 borderColor: item.tag !== 'O' ? 'white' : undefined,
@@ -605,13 +604,17 @@ function NERTester() {
                             },
                             '& .MuiInputBase-input': {
                               color: item.tag !== 'O' ? 'white !important' : 'inherit',
+                              fontWeight: 500,
                             },
                             '& .MuiSvgIcon-root': {
-                              color: item.tag !== 'O' ? 'white' : undefined,
+                              color: item.tag !== 'O' ? 'rgba(255, 255, 255, 0.8)' : undefined,
                             },
                           }}
                         />
                       )}
+                      ListboxProps={{
+                        style: { maxHeight: '200px' }
+                      }}
                     />
                   </TableCell>
                 </TableRow>

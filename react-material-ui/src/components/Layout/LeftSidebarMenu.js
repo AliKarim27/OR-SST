@@ -23,6 +23,10 @@ const LeftSidebarMenu = ({ toggleActive }) => {
            location.pathname === "/apps/ner-tester";
   };
 
+  const isWorkflowActive = () => {
+    return location.pathname === "/apps/workflow";
+  };
+
   return (
     <Box className="leftSidebarDark hide-for-horizontal-nav">
       <Box className="left-sidebar-menu">
@@ -46,6 +50,16 @@ const LeftSidebarMenu = ({ toggleActive }) => {
 
         <Box className="sidebar-inner">
           <Box className="sidebar-menu">
+            <Link
+              to="/apps/workflow"
+              className={`sidebar-menu-link ${isWorkflowActive() ? "active" : ""}`}
+            >
+              <i className="material-symbols-outlined">workflow</i>
+              <Typography component={"span"} className="title">
+                Workflow
+              </Typography>
+            </Link>
+
             <Link
               to="/apps/audio-management"
               className={`sidebar-menu-link ${isActiveLink(

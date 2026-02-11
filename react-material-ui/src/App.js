@@ -19,7 +19,7 @@ import NERTesterPage from "./pages/apps/NERTester";
 import EntityTypesPage from "./pages/apps/EntityTypes";
 
 // Workflow
-import WorkflowPage from "./pages/apps/Workflow";
+import Workflow from "./components/Apps/Workflow/Workflow";
 
 import BlankPage from "./pages/BlankPage";
 
@@ -57,7 +57,7 @@ const App = () => {
 
             <Routes>
               {/* Workflow */}
-              <Route path="/apps/workflow" element={<WorkflowPage />} />
+              <Route path="/apps/workflow" element={<Workflow />} />
               
               {/* Audio Management */}
               <Route path="/apps/audio-management" element={<AudioManagement />} />
