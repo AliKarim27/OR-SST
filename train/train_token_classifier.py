@@ -1,7 +1,14 @@
 import json
 import os
+import sys
+import argparse
+import torch
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForTokenClassification, TrainingArguments, Trainer
+
+# Fix Windows encoding for Unicode characters
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def load_labels(path):
     with open(path, "r") as f:
@@ -27,7 +34,7 @@ def create_dev_from_train():
                 examples.append(json.loads(line))
     
     if not examples:
-        print("⚠️ No training examples found in train.jsonl")
+        print("[WARNING] No training examples found in train.jsonl", flush=True)
         return
     
     # Split 80/20
@@ -45,28 +52,53 @@ def create_dev_from_train():
         for ex in dev_examples:
             f.write(json.dumps(ex, ensure_ascii=False) + "\n")
     
-    print(f"✅ Split data: {len(train_examples)} train, {len(dev_examples)} validation")
+    print(f"[OK] Split data: {len(train_examples)} train, {len(dev_examples)} validation", flush=True)
 
-def main():
+def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_rate=2e-5, max_length=512, output_dir="models/slot_model"):
+    # Disable CUDA before anything else
+    import os
+    os.environ['CUDA_VISIBLE_DEVICES'] = ''
+    torch.cuda.is_available = lambda: False
+    
     # Ensure dev.jsonl exists
     create_dev_from_train()
     
-    base_model = "distilbert-base-uncased"  # use multilingual if needed
+    # Force CPU usage
+    device = torch.device("cpu")
+    print(f"[DEVICE] Using device: {device}", flush=True)
+    
+    # Reduce batch size for CPU training to avoid memory issues
+    if batch_size > 2:
+        batch_size = 2
+        print(f"[CONFIG] Reduced batch_size to {batch_size} for CPU training", flush=True)
+    
+    # Reduce max_length for CPU training to save memory
+    if max_length > 256:
+        max_length = 256
+        print(f"[CONFIG] Reduced max_length to {max_length} for CPU training", flush=True)
+    
+    print(f"[CONFIG] model={base_model}, epochs={epochs}, batch_size={batch_size}, lr={learning_rate}, max_len={max_length}", flush=True)
+    
     label_list, label2id, id2label = load_labels("data/label_map.json")
+    print(f"[LABELS] Loaded {len(label_list)} labels from label_map.json", flush=True)
 
+    print("[DATASET] Loading dataset...", flush=True)
     ds = load_dataset("json", data_files={
         "train": "data/labels/train.jsonl",
         "validation": "data/labels/dev.jsonl"
     })
+    print(f"[OK] Dataset loaded: {len(ds['train'])} train, {len(ds['validation'])} validation", flush=True)
 
+    print("[TOKENIZER] Loading tokenizer...", flush=True)
     tokenizer = AutoTokenizer.from_pretrained(base_model)
+    print("[OK] Tokenizer loaded", flush=True)
 
     def encode(example):
         tok = tokenizer(
             example["tokens"], 
             is_split_into_words=True, 
             truncation=True,
-            max_length=512,
+            max_length=max_length,
             padding="max_length"
         )
         word_ids = tok.word_ids()
@@ -83,26 +115,63 @@ def main():
         tok["labels"] = labels
         return tok
 
+    print("[ENCODE] Tokenizing dataset...", flush=True)
     ds_tok = ds.map(encode)
+    print("[OK] Dataset tokenized", flush=True)
 
-    model = AutoModelForTokenClassification.from_pretrained(
-        base_model,
-        num_labels=len(label_list),
-        id2label=id2label,
-        label2id=label2id
-    )
+    print(f"[MODEL] Loading model: {base_model}...", flush=True)
+    
+    # Load model with CPU-only settings
+    try:
+        import warnings
+        warnings.filterwarnings('ignore')
+        
+        model = AutoModelForTokenClassification.from_pretrained(
+            base_model,
+            num_labels=len(label_list),
+            id2label=id2label,
+            label2id=label2id,
+            device_map=None,  # Don't auto device map
+            low_cpu_mem_usage=False  # Use standard memory usage
+        )
+        model = model.to(device)  # Explicitly move to CPU
+        
+        # CRITICAL: Freeze base model, only train classifier head
+        print("[OPTIMIZE] Freezing base model, training only classifier head", flush=True)
+        for param in model.distilbert.parameters():
+            param.requires_grad = False
+        
+        # Count trainable parameters
+        trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        total_params = sum(p.numel() for p in model.parameters())
+        print(f"[MODEL] Trainable params: {trainable_params:,} / Total params: {total_params:,}", flush=True)
+        
+        print("[OK] Model loaded and moved to CPU", flush=True)
+    except Exception as e:
+        print(f"[ERROR] Failed to load model: {e}", flush=True)
+        raise
 
     args = TrainingArguments(
-        output_dir="models/slot_model",
-        learning_rate=2e-5,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=8,
-        num_train_epochs=5,
+        output_dir=output_dir,
+        learning_rate=learning_rate * 10,  # Higher learning rate for classifier-only training
+        per_device_train_batch_size=batch_size,
+        per_device_eval_batch_size=max(1, batch_size // 2),  # Even smaller eval batch
+        num_train_epochs=epochs,
         weight_decay=0.01,
         eval_strategy="epoch",
-        save_strategy="epoch"
+        save_strategy="epoch",
+        no_cuda=True,  # Force CPU usage
+        use_cpu=True,  # Explicitly use CPU
+        dataloader_pin_memory=False,  # Disable pin_memory
+        report_to="none",  # Don't report to wandb
+        dataloader_num_workers=0,  # Disable multiprocessing for data loading
+        gradient_accumulation_steps=1,  # No accumulation needed for small batches
+        optim="adamw_torch",  # Use memory-efficient optimizer
+        max_grad_norm=1.0,  # Clip gradients
+        logging_steps=1,  # Log every step for visibility
     )
 
+    print("[TRAINER] Initializing trainer...", flush=True)
     trainer = Trainer(
         model=model,
         args=args,
@@ -110,10 +179,43 @@ def main():
         eval_dataset=ds_tok["validation"]
     )
 
-    trainer.train()
-    trainer.save_model("models/slot_model")
-    tokenizer.save_pretrained("models/slot_model")
-    print("✅ Saved trained model to models/slot_model")
+    print("[TRAIN] Starting training...", flush=True)
+    try:
+        import gc
+        gc.collect()  # Clear memory before training
+        trainer.train()
+    except RuntimeError as e:
+        if 'out of memory' in str(e).lower():
+            print("[ERROR] Out of memory - try reducing batch_size or max_length further", flush=True)
+        raise
+    
+    print("[SAVE] Saving model...", flush=True)
+    trainer.save_model(output_dir)
+    tokenizer.save_pretrained(output_dir)
+    print(f"[OK] Training completed! Model saved to {output_dir}", flush=True)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='Train NER Token Classification Model')
+    parser.add_argument('--base_model', type=str, default='distilbert-base-uncased', help='Base model name')
+    parser.add_argument('--epochs', type=int, default=5, help='Number of training epochs')
+    parser.add_argument('--batch_size', type=int, default=8, help='Training batch size')
+    parser.add_argument('--learning_rate', type=float, default=2e-5, help='Learning rate')
+    parser.add_argument('--max_length', type=int, default=512, help='Max sequence length')
+    parser.add_argument('--output_dir', type=str, default='models/slot_model', help='Output directory')
+    
+    args = parser.parse_args()
+    
+    try:
+        main(
+            base_model=args.base_model,
+            epochs=args.epochs,
+            batch_size=args.batch_size,
+            learning_rate=args.learning_rate,
+            max_length=args.max_length,
+            output_dir=args.output_dir
+        )
+    except Exception as e:
+        print(f"[ERROR] Training failed with error: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        exit(1)

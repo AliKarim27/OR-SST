@@ -1,24 +1,1202 @@
-{"tokens": ["date", "twenty", "one", "eleven", "two", "thousand", "twenty", "six"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE", "I-DATE", "I-DATE", "I-DATE", "I-DATE"]}
-{"tokens": ["in", "time", "nine", "thirty", "am"], "tags": ["O", "O", "B-TIME_IN", "I-TIME_IN", "I-TIME_IN"]}
-{"tokens": ["out", "time", "ten", "twenty", "five", "am"], "tags": ["O", "O", "B-TIME_OUT", "I-TIME_OUT", "I-TIME_OUT", "I-TIME_OUT"]}
-{"tokens": ["induction", "time", "nine", "thirty", "two", "am"], "tags": ["O", "O", "B-TIME_INDUCTION", "I-TIME_INDUCTION", "I-TIME_INDUCTION", "I-TIME_INDUCTION"]}
-{"tokens": ["cutting", "time", "nine", "fifty", "one", "am"], "tags": ["O", "O", "B-TIME_CUTTING", "I-TIME_CUTTING", "I-TIME_CUTTING", "I-TIME_CUTTING"]}
-{"tokens": ["time", "of", "dressing", "ten", "twelve", "am"], "tags": ["O", "O", "O", "B-TIME_DRESSING", "I-TIME_DRESSING", "I-TIME_DRESSING"]}
-{"tokens": ["surgeon", "doctor", "mohammad", "farhat"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON"]}
-{"tokens": ["anesthetist", "doctor", "nadine"], "tags": ["O", "O", "B-PERSON_ANESTHETIST"]}
-{"tokens": ["scrub", "nurse", "aida", "saba"], "tags": ["O", "O", "B-PERSON_SCRUB", "I-PERSON_SCRUB"]}
-{"tokens": ["circulating", "nurse", "nabil", "habib"], "tags": ["O", "O", "B-PERSON_CIRC", "I-PERSON_CIRC"]}
-{"tokens": ["technician", "anesthesia", "sabah"], "tags": ["O", "O", "B-PERSON_TECH"]}
-{"tokens": ["pre", "operative", "diagnosis", "pregnancy"], "tags": ["O", "O", "O", "B-DIAG_PRE"]}
-{"tokens": ["post", "operative", "diagnosis", "cesarean", "section"], "tags": ["O", "O", "O", "B-DIAG_POST", "I-DIAG_POST"]}
-{"tokens": ["operation", "code", "five", "nine", "five", "one", "five"], "tags": ["O", "O", "B-OP_CODE", "I-OP_CODE", "I-OP_CODE", "I-OP_CODE", "I-OP_CODE"]}
-{"tokens": ["operation", "cesarean", "section"], "tags": ["O", "B-OP_NAME", "I-OP_NAME"]}
-{"tokens": ["anesthesia", "type", "spinal"], "tags": ["O", "O", "B-ANES_TYPE"]}
-{"tokens": ["patient", "position", "supine"], "tags": ["O", "O", "B-POSITION"]}
-{"tokens": ["foley", "catheter", "with", "irrigation"], "tags": ["B-DEVICE", "I-DEVICE", "O", "I-DEVICE"]}
-{"tokens": ["hemovac", "drain", "inserted"], "tags": ["B-DEVICE", "I-DEVICE", "O"]}
-{"tokens": ["specimen", "sent", "to", "pathology"], "tags": ["O", "O", "O", "B-SPECIMEN"]}
-{"tokens":["surgeon","one","dr","ali","krayem"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
-{"tokens":["surgeon","two","dr","mohammad","farhat"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
-{"tokens":["first","surgeon","doctor","ali","krayem"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
-{"tokens":["second","surgeon","doctor","mohammad","farhat"],"tags":["O","O","B-PERSON_SURGEON","I-PERSON_SURGEON","I-PERSON_SURGEON"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["in", "5", "50", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["date", "07", "02", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "anesthetist", "doctor", "nadine", "abboud"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "1500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "phacoemulsification", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["gauze", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["induction", "time", "8", "05", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "cystectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["umbilical", "tape", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["cutting", "time", "8", "35", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "celine", "azzi"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "muscle", "biopsy"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["person", "surgeon", "doctor", "amira", "mansour"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "thyroidectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "10", "45", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "tech", "doctor", "george", "habib"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "spinal"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["blades", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "rami", "nasr"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "anesthetist", "doctor", "celine", "shami"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["out", "10", "50", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["assigned", "slave", "worker", "karim", "hobeika", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["operation", "code", "16175"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["needles", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["or", "room", "number", "7"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["specimen", "pathology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["blades", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "mohammad", "haddad"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["out", "3", "52", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "12", "30", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["date", "27", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["cottonoid", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "anesthetist", "doctor", "rana", "habib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["abd", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["pad", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["operation", "code", "82063"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["time", "of", "dressing", "4", "25", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["note", "complication", "tachycardia"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "tech", "doctor", "george", "azzi"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "ureteroscopy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "mohammad", "matar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "fish", "penicillin"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "anesthetist", "doctor", "nadine", "nassar"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["umbilical", "tape", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["needles", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["allergy", "nuts", "iodine"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "c", "section", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "12"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["person", "nurse", "doctor", "amira", "abboud"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["cutting", "time", "9", "25", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cutting", "time", "10", "55", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "8", "00", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["abd", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["cutting", "time", "2", "12", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "open", "reduction", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "maya", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["induction", "time", "10", "00", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "10"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["operation", "code", "79615"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["time", "of", "dressing", "8", "55", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["time", "of", "dressing", "8", "45", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["person", "anesthetist", "doctor", "salma", "habib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "phacoemulsification", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "6", "20", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "assistant", "doctor", "rita", "saleh"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["diagnosis", "appendicitis", "procedure", "c", "section", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "assistant", "doctor", "nadine", "saleh"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["person", "nurse", "doctor", "celine", "nassar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["person", "nurse", "doctor", "maya", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["induction", "time", "4", "12", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["or", "room", "number", "11"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "c", "section", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "samir", "saad"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["raney", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "appendectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "7", "55", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "laparoscopic", "cholecystectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "12", "52", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["specimen", "cytology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["needles", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["device", "corrugated", "drain"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "6", "52", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "fadi", "mansour"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "ureteroscopy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["cutting", "time", "12", "15", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "13", "04", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "nurse", "doctor", "omar", "haddad"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["person", "anesthetist", "doctor", "rita", "chamoun"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "surgeon", "doctor", "celine", "haddad"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["induction", "time", "7", "05", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "appendectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "1500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "1", "05", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "12", "45", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["vessel", "loop", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["person", "assistant", "doctor", "yara", "saleh"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["specimen", "culture"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "open", "reduction", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "salma", "nasr"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "iv", "sedation"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["allergy", "iodine", "lactose"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "nurse", "doctor", "karim", "farhat"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["or", "room", "number", "8"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "phacoemulsification", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["needles", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "thyroidectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["raney", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["or", "room", "number", "4"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "9", "52", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "tonsillectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["raney", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "thyroidectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["raney", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "hernia", "repair", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "rana", "nassar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["cutting", "time", "6", "10", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "1000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "ureteroscopy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "7"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "c", "section", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "56105"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "assistant", "doctor", "celine", "kanaan"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["person", "assistant", "doctor", "mohammad", "bouhabib"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "nurse", "doctor", "yara", "saad"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["pad", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "regional"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "ureteroscopy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "samir", "kanaan"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["person", "surgeon", "doctor", "mohammad", "chamoun"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["or", "room", "number", "6"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["person", "surgeon", "doctor", "george", "khoury"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["pad", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["in", "4", "12", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "cystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["pad", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["in", "11", "40", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "appendectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "5", "40", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["gauze", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["umbilical", "tape", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "thyroidectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["vessel", "loop", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["raney", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "open", "reduction", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "assistant", "doctor", "omar", "shami"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["date", "06", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["operation", "code", "56507"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["blades", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "nadine", "salem"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["operation", "code", "12260"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "open", "reduction", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "79588"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "tech", "doctor", "nadine", "nasr"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["person", "assistant", "doctor", "mariam", "haddad"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "nurse", "doctor", "hadi", "mansour"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["pad", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "anesthetist", "doctor", "maya", "matar"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["note", "complication", "tachycardia"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "fair"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "mariam", "farhat"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["or", "room", "number", "1"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["in", "4", "15", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["operation", "code", "67733"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "tech", "doctor", "samir", "youssef"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["in", "1", "30", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["allergy", "fish", "latex"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["time", "of", "dressing", "11", "05", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["assigned", "slave", "worker", "sarah", "chamoun", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["cottonoid", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "open", "reduction", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "anesthetist", "doctor", "salma", "mansour"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "10", "15", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "culture"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["person", "anesthetist", "doctor", "layla", "farhat"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "ureteroscopy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["date", "23", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "nurse", "doctor", "rana", "salem"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "8", "35", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "samir", "nassar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["vessel", "loop", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["induction", "time", "6", "25", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["baby", "girl", "was", "born", "crying", "at", "8", "40", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["or", "room", "number", "7"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["vessel", "loop", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["allergy", "fish", "eggs"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["time", "of", "dressing", "1", "45", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["abd", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "assistant", "doctor", "rita", "mansour"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["device", "corrugated", "drain"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["operation", "code", "96846"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "8", "20", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "omar", "bouhabib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "hernia", "repair", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["person", "anesthetist", "doctor", "marwan", "saleh"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "appendectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "tachycardia"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["pad", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "sarah", "shami"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "6", "15", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["umbilical", "tape", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "myomectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["baby", "boy", "was", "born", "alive", "at", "11", "52", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["needles", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["baby", "girl", "was", "born", "alive", "at", "11", "50", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "rita", "youssef"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "anesthetist", "doctor", "nadine", "bouhabib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "hernia", "repair", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "12"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["operation", "code", "59968"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "14852"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["time", "of", "dressing", "12", "55", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cutting", "time", "8", "35", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "laparoscopic", "cholecystectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "44737"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "nurse", "doctor", "george", "habib"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["line", "iv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "thyroidectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "mariam", "salem"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["needles", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["abd", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["induction", "time", "7", "00", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "jana", "azzi"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "tonsillectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "fair"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["time", "of", "dressing", "1", "40", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["person", "surgeon", "doctor", "lina", "shami"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["allergy", "eggs"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["cutting", "time", "2", "05", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "rami", "saleh"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["assigned", "slave", "worker", "mariam", "farhat", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["note", "complication", "nausea"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "phacoemulsification", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["cottonoid", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["induction", "time", "5", "52", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["pad", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["allergy", "fish", "eggs"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["gauze", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "marwan", "saleh"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "assistant", "doctor", "nabil", "nassar"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["blades", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["cutting", "time", "11", "50", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["needles", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "nurse", "doctor", "mohammad", "haddad"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["specimen", "stone", "analysis"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["person", "assistant", "doctor", "george", "azzi"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["out", "2", "00", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["in", "7", "15", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["assigned", "slave", "worker", "sarah", "mansour", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["person", "anesthetist", "doctor", "yara", "shami"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "myomectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["date", "07", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "cystectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "appendectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["or", "room", "number", "6"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["person", "surgeon", "doctor", "rami", "abboud"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["allergy", "penicillin", "sulfa"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["cottonoid", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["gauze", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["specimen", "pathology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["induction", "time", "10", "40", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "ali", "nassar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["raney", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["umbilical", "tape", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["raney", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["time", "of", "dressing", "10", "40", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["or", "room", "number", "11"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "iv", "sedation"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["assigned", "slave", "worker", "dima", "bouhabib", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["diagnosis", "appendicitis", "procedure", "ureteroscopy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["person", "surgeon", "doctor", "karim", "haddad"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "tonsillectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["abd", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["specimen", "muscle", "biopsy"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "myomectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["needles", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["blades", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "karim", "youssef"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["blades", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "tachycardia"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["person", "surgeon", "doctor", "tarek", "abboud"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["cutting", "time", "10", "55", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["time", "of", "dressing", "12", "05", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cottonoid", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["raney", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["date", "23", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["blades", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "19", "03", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["specimen", "pathology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["in", "8", "50", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "cystectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["abd", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["time", "of", "dressing", "7", "45", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["allergy", "nuts"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["operation", "code", "67939"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "tonsillectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "rita", "matar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["operation", "code", "97442"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "surgeon", "doctor", "salma", "khoury"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["date", "07", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["vessel", "loop", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["person", "surgeon", "doctor", "maya", "kanaan"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["cutting", "time", "3", "50", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "rita", "azzi"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["allergy", "fish", "nuts"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["date", "28", "02", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "assistant", "doctor", "yara", "kanaan"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "assistant", "doctor", "hadi", "saad"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["umbilical", "tape", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "8", "12", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "tonsillectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "cystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "tarek", "mansour"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["person", "nurse", "doctor", "bilal", "nassar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["person", "surgeon", "doctor", "nabil", "saad"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["cutting", "time", "2", "52", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "ureteroscopy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["gauze", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "cystectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "c", "section", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "anesthetist", "doctor", "karim", "khoury"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "appendectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "12"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "tonsillectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "tech", "doctor", "yara", "kanaan"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["gauze", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["person", "anesthetist", "doctor", "yara", "saleh"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "nurse", "doctor", "marwan", "najjar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["specimen", "cytology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["person", "nurse", "doctor", "rita", "bouhabib"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["in", "11", "35", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "laparoscopic", "cholecystectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["person", "tech", "doctor", "hadi", "youssef"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["out", "9", "05", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "nurse", "doctor", "tarek", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["raney", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["specimen", "muscle", "biopsy"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["out", "6", "52", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["gauze", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "nurse", "doctor", "hassan", "najjar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["person", "nurse", "doctor", "hassan", "salem"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["cottonoid", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["assigned", "slave", "worker", "hassan", "saleh", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["raney", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "hernia", "repair", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "250", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["person", "nurse", "doctor", "samir", "shami"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["blades", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "tonsillectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "tech", "doctor", "jana", "salem"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["date", "27", "02", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["induction", "time", "2", "50", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["umbilical", "tape", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["date", "27", "04", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["time", "of", "dressing", "3", "25", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["induction", "time", "10", "15", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "1", "45", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["umbilical", "tape", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["cutting", "time", "4", "35", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["date", "19", "09", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "surgeon", "doctor", "jad", "farhat"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["note", "complication", "tachycardia"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["blades", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "nurse", "doctor", "george", "mansour"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["blades", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["or", "room", "number", "9"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["person", "nurse", "doctor", "bilal", "shami"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["or", "room", "number", "8"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["or", "room", "number", "4"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["or", "room", "number", "4"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["or", "room", "number", "11"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["induction", "time", "7", "55", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "cytology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["induction", "time", "1", "25", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["needles", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "1500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "jad", "habib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "tonsillectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "rita", "saleh"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "anesthetist", "doctor", "jad", "saad"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "1000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["or", "room", "number", "6"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["person", "tech", "doctor", "ali", "habib"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["person", "nurse", "doctor", "rita", "saad"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["umbilical", "tape", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["out", "5", "20", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "tech", "doctor", "ali", "najjar"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["cutting", "time", "12", "20", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "appendicitis", "procedure", "phacoemulsification", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["umbilical", "tape", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "appendectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["umbilical", "tape", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["assigned", "slave", "worker", "mariam", "youssef", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["person", "surgeon", "doctor", "rana", "shami"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["cutting", "time", "8", "52", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "muscle", "biopsy"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["assigned", "slave", "worker", "rita", "azzi", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "1500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["person", "assistant", "doctor", "layla", "saad"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["out", "9", "12", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["gauze", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["or", "room", "number", "7"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["assigned", "slave", "worker", "maya", "youssef", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "cystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "iv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["out", "11", "10", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "12", "35", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["time", "of", "dressing", "11", "10", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "regional"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["baby", "boy", "was", "born", "alive", "at", "5", "40", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["blades", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["or", "room", "number", "1"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["allergy", "eggs", "penicillin"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["needles", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["device", "corrugated", "drain"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["person", "nurse", "doctor", "yara", "saleh"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "laparoscopic", "cholecystectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "hernia", "repair", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["raney", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["out", "2", "05", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "sarah", "khoury"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "assistant", "doctor", "salma", "kanaan"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "nurse", "doctor", "layla", "nasr"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["baby", "girl", "was", "born", "alive", "at", "9", "30", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["assigned", "slave", "worker", "hassan", "youssef", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["baby", "girl", "was", "born", "alive", "at", "10", "40", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "zeinab", "najjar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "surgeon", "doctor", "sarah", "kanaan"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["induction", "time", "6", "20", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["blades", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "tonsillectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "yara", "hobeika"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "open", "reduction", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["in", "1", "20", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["blades", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["baby", "boy", "was", "born", "alive", "at", "4", "35", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "c", "section", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "2", "35", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "tonsillectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "anesthetist", "doctor", "layla", "bouhabib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["assigned", "slave", "worker", "maya", "saleh", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "12180"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "appendectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "omar", "matar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["time", "of", "dressing", "1", "10", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cottonoid", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "fair"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["date", "14", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["out", "1", "35", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["umbilical", "tape", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["pad", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "assistant", "doctor", "rita", "youssef"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "spinal"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "cystectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "muscle", "biopsy"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["vessel", "loop", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["operation", "code", "42311"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "assistant", "doctor", "mariam", "saleh"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["operation", "code", "72888"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "tech", "doctor", "lina", "haddad"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["person", "anesthetist", "doctor", "nadine", "bouhabib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["person", "assistant", "doctor", "fadi", "habib"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "assistant", "doctor", "samir", "youssef"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "nurse", "doctor", "samir", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "250", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["person", "nurse", "doctor", "tarek", "salem"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["induction", "time", "6", "30", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "7", "35", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "ureteroscopy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["vessel", "loop", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["person", "surgeon", "doctor", "omar", "habib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["specimen", "culture"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "spinal"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "c", "section", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["pad", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["person", "tech", "doctor", "nadine", "hobeika"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["operation", "code", "27589"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["blades", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["vessel", "loop", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["induction", "time", "11", "40", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "culture"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["cutting", "time", "1", "35", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "assistant", "doctor", "sarah", "saad"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["person", "surgeon", "doctor", "samir", "bouhabib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "nurse", "doctor", "hadi", "saleh"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "stone", "analysis"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["person", "nurse", "doctor", "hassan", "saleh"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["time", "of", "dressing", "6", "52", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "marwan", "saleh"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "hernia", "repair", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "69634"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["blades", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "1500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["baby", "boy", "was", "born", "alive", "at", "3", "35", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "layla", "nasr"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["device", "corrugated", "drain"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["person", "anesthetist", "doctor", "rana", "hobeika"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "ureteroscopy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "regional"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["or", "room", "number", "8"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["specimen", "cytology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["needles", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["cottonoid", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["allergy", "iodine"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "250", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "7", "15", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "thyroidectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "ureteroscopy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "cytology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["time", "of", "dressing", "1", "35", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "7", "52", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["date", "15", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "hernia", "repair", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "open", "reduction", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["baby", "boy", "was", "born", "alive", "at", "5", "25", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["person", "surgeon", "doctor", "salma", "khoury"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "c", "section", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["needles", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "dima", "khoury"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["induction", "time", "10", "55", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "fair"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "rita", "hobeika"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "assistant", "doctor", "ali", "chamoun"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "5", "25", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "12", "50", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "open", "reduction", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["time", "of", "dressing", "2", "12", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["vessel", "loop", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["cutting", "time", "7", "35", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "tonsillectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "hernia", "repair", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["abd", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["cottonoid", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "nurse", "doctor", "salma", "khoury"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["operation", "code", "53642"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "nurse", "doctor", "nabil", "abboud"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["umbilical", "tape", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "tonsillectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["needles", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["person", "anesthetist", "doctor", "zeinab", "shami"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["allergy", "shellfish", "iodine"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["device", "cystofix"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["or", "room", "number", "4"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["gauze", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "10", "25", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["umbilical", "tape", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "ovarian", "cyst", "procedure", "laparoscopic", "cholecystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["umbilical", "tape", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "7", "55", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["gauze", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "hernia", "repair", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "500", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["specimen", "pathology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["date", "14", "09", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["date", "24", "09", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "tech", "doctor", "mohammad", "hobeika"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["needles", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["in", "3", "10", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "samir", "azzi"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "assistant", "doctor", "jana", "bouhabib"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "hernia", "repair", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["assigned", "slave", "worker", "george", "khoury", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["allergy", "nuts"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "1000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["blades", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "celine", "matar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["operation", "code", "16102"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "4", "45", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["date", "01", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["note", "complication", "tachycardia"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["cutting", "time", "8", "15", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "4", "55", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["raney", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "appendectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "7"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["person", "surgeon", "doctor", "salma", "najjar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["date", "26", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["assigned", "slave", "worker", "zeinab", "salem", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["person", "tech", "doctor", "jad", "saad"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["specimen", "stone", "analysis"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "open", "reduction", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["out", "6", "25", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "mohammad", "saleh"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "appendectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "shellfish"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["date", "18", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["allergy", "iodine", "nuts"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["date", "13", "07", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "11", "15", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["operation", "code", "18292"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["induction", "time", "1", "15", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["operation", "code", "20082"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "tech", "doctor", "maya", "youssef"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "7", "25", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "lina", "nasr"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "anesthetist", "doctor", "fadi", "abboud"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["operation", "code", "33283"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["person", "nurse", "doctor", "zeinab", "matar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["blades", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "nurse", "doctor", "jana", "mansour"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "3", "10", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "csf"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["date", "15", "12", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "11", "55", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["operation", "code", "93012"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "surgeon", "doctor", "karim", "kanaan"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["abd", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["assigned", "slave", "worker", "zeinab", "matar", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["blades", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["device", "corrugated", "drain"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["specimen", "cytology"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["time", "of", "dressing", "7", "40", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["assigned", "slave", "worker", "rita", "bouhabib", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["in", "11", "12", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "sarah", "saleh"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "appendicitis", "procedure", "appendectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "lina", "abboud"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["allergy", "shellfish", "iodine"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["abd", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["abd", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["cottonoid", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["out", "12", "35", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "hernia", "repair", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "hernia", "repair", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["abd", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["time", "of", "dressing", "9", "20", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "samir", "youssef"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "regional"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "phacoemulsification", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "salma", "saad"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["vessel", "loop", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "8", "10", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "tonsillectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "phacoemulsification", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "thyroidectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "2", "40", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["or", "room", "number", "6"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["cutting", "time", "3", "35", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["umbilical", "tape", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["cottonoid", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "18", "04", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "nurse", "doctor", "rami", "youssef"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "regional"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["time", "of", "dressing", "12", "35", "pm"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["gauze", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["cottonoid", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "hassan", "mansour"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["blades", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["out", "10", "55", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "surgeon", "doctor", "jana", "chamoun"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "anesthetist", "doctor", "hadi", "saleh"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "surgeon", "doctor", "dima", "hobeika"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["assigned", "slave", "worker", "rita", "mansour", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["cutting", "time", "7", "15", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "bilal", "salem"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["needles", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["induction", "time", "5", "25", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "appendicitis", "procedure", "thyroidectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "cystectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "fever"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "assistant", "doctor", "nabil", "youssef"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "nurse", "doctor", "hadi", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["allergy", "fish"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["out", "2", "30", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["date", "07", "07", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["assigned", "slave", "worker", "marwan", "nassar", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["allergy", "eggs"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["allergy", "latex", "fish"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "hernia", "repair", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "stone", "analysis"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["operation", "code", "27393"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["date", "27", "06", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["cutting", "time", "6", "10", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["operation", "code", "40008"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["diagnosis", "appendicitis", "procedure", "appendectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "laparoscopic", "cholecystectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["pad", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["assigned", "slave", "worker", "karim", "habib", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "regional"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["specimen", "frozen", "section"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["person", "surgeon", "doctor", "maya", "nassar"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["baby", "girl", "was", "born", "alive", "at", "8", "05", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["in", "4", "50", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "cystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "amira", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["gauze", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["wound", "classification", "clean", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["operation", "code", "24777"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "nurse", "doctor", "rana", "hobeika"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "4", "25", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "nurse", "doctor", "omar", "youssef"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["date", "01", "02", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "surgeon", "doctor", "ali", "bouhabib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["position", "intra", "op", "lithotomy", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["induction", "time", "1", "40", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["person", "assistant", "doctor", "dima", "salem"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["or", "room", "number", "2"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "4", "40", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["or", "room", "number", "11"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["pad", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "23", "03", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["date", "12", "08", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "spinal"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "appendectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "tarek", "habib"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "tech", "doctor", "george", "habib"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["operation", "code", "76949"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "anesthetist", "doctor", "rami", "saad"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "appendectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "anesthetist", "doctor", "ali", "farhat"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "anesthetist", "doctor", "yara", "nassar"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["in", "3", "52", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "surgeon", "doctor", "marwan", "nasr"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "surgeon", "doctor", "jana", "mansour"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "spinal"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["person", "anesthetist", "doctor", "ali", "bouhabib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["allergy", "eggs"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["vessel", "loop", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["allergy", "fish"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "phacoemulsification", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["cottonoid", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "hernia", "repair", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["cutting", "time", "7", "12", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["position", "intra", "op", "supine", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["date", "13", "11", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["vessel", "loop", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["person", "tech", "doctor", "jad", "youssef"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "250", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "12", "30", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["note", "complication", "retained", "sponge"], "tags": ["O", "O", "B-COMPLICATION", "I-COMPLICATION"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "fish", "nuts"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["specimen", "culture"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["person", "surgeon", "doctor", "hadi", "bouhabib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "rana", "abboud"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["time", "of", "dressing", "8", "10", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["cutting", "time", "2", "20", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "cystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "open", "reduction", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["allergy", "eggs", "fish"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["person", "nurse", "doctor", "karim", "habib"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "1000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["pad", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "appendectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "4"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["cutting", "time", "12", "45", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["date", "07", "02", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["allergy", "lactose"], "tags": ["O", "B-ALLERGY"]}
+{"tokens": ["or", "room", "number", "8"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["or", "room", "number", "10"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "ureteroscopy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "laparoscopic", "cholecystectomy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "surgeon", "doctor", "samir", "shami"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["device", "chest", "tube"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["operation", "code", "82179"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["operation", "code", "21497"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "surgeon", "doctor", "nabil", "hobeika"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "tech", "doctor", "nadine", "farhat"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["assigned", "slave", "worker", "lina", "azzi", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["operation", "code", "73527"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "anesthetist", "doctor", "hadi", "bouhabib"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "surgeon", "doctor", "salma", "salem"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["date", "02", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["umbilical", "tape", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["person", "anesthetist", "doctor", "amira", "saad"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["out", "11", "35", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["gauze", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "ccu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["baby", "boy", "was", "born", "alive", "at", "10", "40", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "nurse", "doctor", "jana", "matar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["date", "12", "12", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "10", "55", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["assigned", "slave", "worker", "celine", "youssef", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "local"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["or", "room", "number", "1"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["person", "surgeon", "doctor", "tarek", "youssef"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["date", "07", "10", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["blades", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["induction", "time", "7", "00", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "8", "55", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "layla", "kanaan"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["umbilical", "tape", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["person", "nurse", "doctor", "nadine", "najjar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "karim", "saad"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["needles", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "11", "10", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["baby", "boy", "was", "born", "stable", "at", "4", "05", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["baby", "boy", "was", "born", "crying", "at", "6", "05", "pm"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "tech", "doctor", "layla", "habib"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["blades", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "08", "04", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["gauze", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "laparoscopic", "cholecystectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["operation", "code", "59638"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "assistant", "doctor", "bilal", "youssef"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["cottonoid", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "open", "reduction", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "I-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "tech", "doctor", "rana", "nasr"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["cutting", "time", "9", "50", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["allergy", "none"], "tags": ["O", "O"]}
+{"tokens": ["person", "tech", "doctor", "celine", "youssef"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["cutting", "time", "9", "00", "am"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["out", "10", "25", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["position", "intra", "op", "lateral", "anesthesia", "epidural"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["person", "surgeon", "doctor", "rami", "chamoun"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["pad", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "assistant", "doctor", "mariam", "najjar"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["operation", "code", "22712"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["date", "21", "03", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["person", "surgeon", "doctor", "dima", "mansour"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["person", "assistant", "doctor", "zeinab", "haddad"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["allergy", "nuts", "latex"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "cystectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "ureteroscopy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "rami", "khoury"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["in", "8", "45", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "anesthetist", "doctor", "omar", "matar"], "tags": ["O", "O", "B-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST", "I-PERSON_ANESTHETIST"]}
+{"tokens": ["person", "surgeon", "doctor", "yara", "hobeika"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["diagnosis", "tonsillitis", "procedure", "thyroidectomy", "condition", "extubated"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "icu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "assistant", "doctor", "dima", "khoury"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "general"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE"]}
+{"tokens": ["baby", "girl", "was", "born", "alive", "at", "9", "12", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["pad", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "thyroid", "nodule", "procedure", "myomectomy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["assigned", "slave", "worker", "george", "nassar", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["vessel", "loop", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["allergy", "nuts", "iodine"], "tags": ["O", "B-ALLERGY", "B-ALLERGY"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["raney", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["out", "9", "40", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "stable"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "arterial", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "rami", "najjar"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["operation", "code", "32570"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["person", "surgeon", "doctor", "salma", "bouhabib"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["or", "room", "number", "6"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["irrigation", "type", "normal", "saline", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["operation", "code", "45203"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["device", "nephrostomy"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "dima", "mansour"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["note", "complication", "bleeding"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["cutting", "time", "12", "15", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["abd", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["diagnosis", "uterine", "fibroid", "procedure", "ureteroscopy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["or", "room", "number", "12"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["position", "intra", "op", "prone", "anesthesia", "monitored", "anesthesia", "care"], "tags": ["O", "O", "O", "B-POSITION", "O", "B-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE", "I-ANESTHESIA_TYPE"]}
+{"tokens": ["line", "cv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["out", "7", "12", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["date", "12", "01", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "750", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["raney", "10"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["specimen", "culture"], "tags": ["O", "B-SPECIMEN_TYPE"]}
+{"tokens": ["diagnosis", "cataract", "procedure", "ureteroscopy", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["note", "complication", "hypotension"], "tags": ["O", "O", "B-COMPLICATION"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["induction", "time", "6", "55", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "250", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["diagnosis", "cholelithiasis", "procedure", "phacoemulsification", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["line", "iv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "nurse", "doctor", "tarek", "farhat"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["line", "iv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["date", "21", "03", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["in", "10", "15", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["wound", "classification", "contaminated"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["irrigation", "type", "sterile", "water", "amount", "2000", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["person", "nurse", "doctor", "dima", "azzi"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["diagnosis", "inguinal", "hernia", "procedure", "ureteroscopy", "condition", "intubated"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["specimen", "muscle", "biopsy"], "tags": ["O", "B-SPECIMEN_TYPE", "I-SPECIMEN_TYPE"]}
+{"tokens": ["wound", "classification", "clean"], "tags": ["O", "O", "B-WOUND_CLASS"]}
+{"tokens": ["date", "27", "11", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["raney", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["patient", "sent", "to", "floor", "condition", "intubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["irrigation", "type", "ringer", "lactate", "amount", "250", "ml"], "tags": ["O", "O", "B-IRRIGATION_TYPE", "I-IRRIGATION_TYPE", "O", "B-AMOUNT", "I-AMOUNT"]}
+{"tokens": ["person", "assistant", "doctor", "hadi", "haddad"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["person", "nurse", "doctor", "celine", "saleh"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["time", "of", "dressing", "10", "00", "am"], "tags": ["O", "O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["needles", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "surgeon", "doctor", "mohammad", "youssef"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["assigned", "slave", "worker", "samir", "kanaan", "to", "support", "cleaning"], "tags": ["O", "B-SLAVE", "I-SLAVE", "I-SLAVE", "I-SLAVE", "O", "O", "O"]}
+{"tokens": ["diagnosis", "pregnancy", "procedure", "phacoemulsification", "condition", "fair"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["person", "nurse", "doctor", "rita", "chamoun"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["wound", "classification", "infected", "dirty"], "tags": ["O", "O", "B-WOUND_CLASS", "I-WOUND_CLASS"]}
+{"tokens": ["line", "iv", "line"], "tags": ["O", "B-LINE_DEVICE", "I-LINE_DEVICE"]}
+{"tokens": ["person", "surgeon", "doctor", "rita", "chamoun"], "tags": ["O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "I-PERSON_SURGEON"]}
+{"tokens": ["in", "2", "10", "pm"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["baby", "girl", "was", "born", "stable", "at", "8", "12", "am"], "tags": ["B-NEWBORN", "I-NEWBORN", "O", "O", "B-OUTCOME", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "nurse", "doctor", "mariam", "kanaan"], "tags": ["O", "O", "B-PERSON_NURSE", "I-PERSON_NURSE", "I-PERSON_NURSE"]}
+{"tokens": ["blades", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["person", "assistant", "doctor", "dima", "mansour"], "tags": ["O", "O", "B-PERSON_ASSISTANT", "I-PERSON_ASSISTANT", "I-PERSON_ASSISTANT"]}
+{"tokens": ["operation", "code", "93151"], "tags": ["O", "O", "B-OP_CODE"]}
+{"tokens": ["patient", "sent", "to", "pacu", "condition", "extubated"], "tags": ["O", "O", "O", "B-DESTINATION", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "corrugated", "drain"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["diagnosis", "fracture", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["device", "ngt"], "tags": ["O", "B-TUBE_DEVICE"]}
+{"tokens": ["person", "tech", "doctor", "celine", "shami"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["out", "8", "30", "am"], "tags": ["O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["person", "tech", "doctor", "hadi", "khoury"], "tags": ["O", "O", "B-PERSON_TECH", "I-PERSON_TECH", "I-PERSON_TECH"]}
+{"tokens": ["date", "07", "05", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["pad", "20"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["umbilical", "tape", "1"], "tags": ["B-SUPPLY_ITEM", "B-COUNT", "O"]}
+{"tokens": ["cutting", "time", "5", "25", "pm"], "tags": ["O", "O", "B-TIME", "I-TIME", "I-TIME"]}
+{"tokens": ["diagnosis", "kidney", "stone", "procedure", "myomectomy", "condition", "stable"], "tags": ["O", "B-DIAGNOSIS", "I-DIAGNOSIS", "O", "B-PROCEDURE", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["or", "room", "number", "4"], "tags": ["O", "O", "O", "B-OR_ROOM"]}
+{"tokens": ["gauze", "5"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["raney", "2"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["date", "21", "01", "2026"], "tags": ["O", "B-DATE", "I-DATE", "I-DATE"]}
+{"tokens": ["cottonoid", "36"], "tags": ["B-SUPPLY_ITEM", "B-COUNT"]}
+{"tokens": ["device", "foley", "with", "irrigation"], "tags": ["O", "B-TUBE_DEVICE", "I-TUBE_DEVICE", "I-TUBE_DEVICE"]}
+{"tokens": ["CABG", "procedure", "started", "at", "07:00", "in", "OR", "5.", "Lead", "surgeon", "Dr.", "Anderson,", "first", "assistant", "Dr.", "Brown.", "Patient", "vitals:", "heart", "rate", "72,", "oxygen", "saturation", "98", "percent.", "Heparin", "administered", "during", "bypass."], "tags": ["O", "O", "O", "O", "B-TIME", "O", "O", "B-OR_ROOM", "O", "O", "B-PERSON_SURGEON", "O", "O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "B-PATIENT_CONDITION"]}
+{"tokens": ["CABG", "procedure", "started", "at", "07:00", "in", "OR", "5.", "Lead", "surgeon", "Dr.", "Anderson,", "first", "assistant", "Dr.", "Brown.", "Patient", "vitals:", "heart", "rate", "72,", "oxygen", "saturation", "98", "percent.", "Heparin", "administered", "during", "bypass."], "tags": ["O", "O", "O", "O", "B-TIME", "O", "O", "B-OR_ROOM", "O", "O", "B-PERSON_SURGEON", "O", "O", "O", "B-PERSON_SURGEON", "I-PERSON_SURGEON", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "B-PATIENT_CONDITION"]}

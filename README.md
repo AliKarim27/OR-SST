@@ -6,7 +6,7 @@ AI-OR is an AI-powered assistant designed for operating room environments. It co
 
 - **Speech-to-Text (STT)**: Transcribes audio recordings using OpenAI's Whisper model (via faster-whisper).
 - **Slot Filling Extraction**: Uses a fine-tuned BERT-based token classifier to extract structured information from transcribed text, such as dates, times, personnel, diagnoses, and procedures.
-- **Web Interface**: Interactive Streamlit app for uploading audio files and viewing extracted information.
+- **Web Interface**: React dashboard for uploading audio files and viewing extracted information.
 - **Training Pipeline**: Scripts to train custom slot filling models on labeled datasets.
 
 ## Installation
@@ -66,29 +66,27 @@ You can modify `train/train_token_classifier.py` to adjust hyperparameters or mo
 
 ## Running the Application
 
-1. **Start the Streamlit app**:
+1. **Start the React dashboard**:
    ```bash
-   streamlit run app/gradio_app.py
+   cd react-material-ui
+   npm install
+   npm start
    ```
 
 2. **Access the interface**:
-   Open your browser to `http://localhost:8501`
+   Open your browser to `http://localhost:3000`
 
 ### Usage
 
-1. **Upload Audio**: Use the file uploader to select an audio file (WAV, MP3, etc.).
+1. **Upload Audio**: Use the dashboard workflow to select an audio file (WAV, MP3, etc.).
 2. **Transcribe**: The app will transcribe the audio using Whisper.
 3. **Extract Information**: The slot filling model will process the transcript and extract structured data.
 4. **View Results**: See the extracted entities in a structured format.
-
-The app supports English language transcription by default. Modify `STT_LANG` in `app/gradio_app.py` for other languages.
 
 ## Project Structure
 
 ```
 Ai-OR/
-├── app/
-│   └── gradio_app.py          # Main Streamlit application
 ├── data/
 │   ├── label_map.json         # Label definitions for slot filling
 │   └── labels/
@@ -104,6 +102,7 @@ Ai-OR/
 │   └── stt_whisper.py         # Whisper-based STT
 ├── train/
 │   └── train_token_classifier.py  # Training script
+├── react-material-ui/         # React dashboard UI
 ├── requirements.txt           # Python dependencies
 └── README.md                  # This file
 ```
@@ -111,12 +110,13 @@ Ai-OR/
 ## Dependencies
 
 Key libraries:
-- `streamlit`: Web interface
 - `faster-whisper`: Efficient Whisper implementation
 - `transformers`: Hugging Face transformers for slot filling
 - `torch`: PyTorch for model training/inference
 - `librosa`: Audio processing
 - `datasets`: Data loading utilities
+
+Frontend dependencies live in `react-material-ui/package.json`.
 
 ## Model Details
 

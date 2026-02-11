@@ -1,0 +1,61 @@
+{
+  "name": "central-or",
+  "version": "3.2.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/lab": "^6.0.0-beta.21",
+    "@mui/material": "^6.3.0",
+    "@mui/x-data-grid": "^7.23.5",
+    "@mui/x-data-grid-generator": "^7.23.5",
+    "@mui/x-date-pickers": "^7.23.3",
+    "@mui/x-tree-view": "^7.23.2",
+    "apexcharts": "^4.3.0",
+    "boxicons": "^2.1.4",
+    "cra-template": "1.2.0",
+    "dayjs": "^1.11.13",
+    "react": "^19.0.0",
+    "react-apexcharts": "^1.7.0",
+    "react-datetime-picker": "^6.0.1",
+    "react-dom": "^19.0.0",
+    "react-h5-audio-player": "^3.10.1",
+    "react-router-dom": "^7.1.1",
+    "react-scripts": "5.0.1",
+    "react-simple-wysiwyg": "^3.2.0",
+    "remixicon": "^4.6.0",
+    "swiper": "^11.1.15"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "web-vitals": "^4.2.4"
+  }
+}

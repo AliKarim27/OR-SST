@@ -1,0 +1,151 @@
+{
+  "scheme": "BIO",
+  "outside_tag": "O",
+  "labels": [
+    {
+      "B": "B-PERSON_SURGEON",
+      "I": "I-PERSON_SURGEON",
+      "type": "PERSON_SURGEON"
+    },
+    {
+      "B": "B-PERSON_ASSISTANT",
+      "I": "I-PERSON_ASSISTANT",
+      "type": "PERSON_ASSISTANT"
+    },
+    {
+      "B": "B-PERSON_ANESTHETIST",
+      "I": "I-PERSON_ANESTHETIST",
+      "type": "PERSON_ANESTHETIST"
+    },
+    {
+      "B": "B-PERSON_NURSE",
+      "I": "I-PERSON_NURSE",
+      "type": "PERSON_NURSE"
+    },
+    {
+      "B": "B-PERSON_TECH",
+      "I": "I-PERSON_TECH",
+      "type": "PERSON_TECH"
+    },
+    {
+      "B": "B-DATE",
+      "I": "I-DATE",
+      "type": "DATE"
+    },
+    {
+      "B": "B-TIME",
+      "I": "I-TIME",
+      "type": "TIME"
+    },
+    {
+      "B": "B-OR_ROOM",
+      "I": "I-OR_ROOM",
+      "type": "OR_ROOM"
+    },
+    {
+      "B": "B-DIAGNOSIS",
+      "I": "I-DIAGNOSIS",
+      "type": "DIAGNOSIS"
+    },
+    {
+      "B": "B-PROCEDURE",
+      "I": "I-PROCEDURE",
+      "type": "PROCEDURE"
+    },
+    {
+      "B": "B-OP_CODE",
+      "I": "I-OP_CODE",
+      "type": "OP_CODE"
+    },
+    {
+      "B": "B-ALLERGY",
+      "I": "I-ALLERGY",
+      "type": "ALLERGY"
+    },
+    {
+      "B": "B-POSITION",
+      "I": "I-POSITION",
+      "type": "POSITION"
+    },
+    {
+      "B": "B-ANESTHESIA_TYPE",
+      "I": "I-ANESTHESIA_TYPE",
+      "type": "ANESTHESIA_TYPE"
+    },
+    {
+      "B": "B-DESTINATION",
+      "I": "I-DESTINATION",
+      "type": "DESTINATION"
+    },
+    {
+      "B": "B-PATIENT_CONDITION",
+      "I": "I-PATIENT_CONDITION",
+      "type": "PATIENT_CONDITION"
+    },
+    {
+      "B": "B-WOUND_CLASS",
+      "I": "I-WOUND_CLASS",
+      "type": "WOUND_CLASS"
+    },
+    {
+      "B": "B-SPECIMEN_TYPE",
+      "I": "I-SPECIMEN_TYPE",
+      "type": "SPECIMEN_TYPE"
+    },
+    {
+      "B": "B-IRRIGATION_TYPE",
+      "I": "I-IRRIGATION_TYPE",
+      "type": "IRRIGATION_TYPE"
+    },
+    {
+      "B": "B-AMOUNT",
+      "I": "I-AMOUNT",
+      "type": "AMOUNT"
+    },
+    {
+      "B": "B-SUPPLY_ITEM",
+      "I": "I-SUPPLY_ITEM",
+      "type": "SUPPLY_ITEM"
+    },
+    {
+      "B": "B-COUNT",
+      "I": "I-COUNT",
+      "type": "COUNT"
+    },
+    {
+      "B": "B-TUBE_DEVICE",
+      "I": "I-TUBE_DEVICE",
+      "type": "TUBE_DEVICE"
+    },
+    {
+      "B": "B-LINE_DEVICE",
+      "I": "I-LINE_DEVICE",
+      "type": "LINE_DEVICE"
+    },
+    {
+      "B": "B-COMPLICATION",
+      "I": "I-COMPLICATION",
+      "type": "COMPLICATION"
+    },
+    {
+      "B": "B-OUTCOME",
+      "I": "I-OUTCOME",
+      "type": "OUTCOME"
+    },
+    {
+      "B": "B-NEWBORN",
+      "I": "I-NEWBORN",
+      "type": "NEWBORN"
+    },
+    {
+      "B": "B-SLAVE",
+      "I": "I-SLAVE",
+      "type": "SLAVE"
+    }
+  ],
+  "notes": {
+    "recommended_example_length_tokens": "20-120",
+    "recommended_segmentation": "one field line, one sentence, or 2–3 related lines",
+    "tokenization": "lowercase, punctuation removed, whitespace split"
+  }
+}
