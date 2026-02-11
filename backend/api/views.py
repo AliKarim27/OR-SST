@@ -31,6 +31,7 @@ OUTPUTS_DIR = PROJECT_ROOT / 'data' / 'outputs'
 LABELS_DIR = PROJECT_ROOT / 'data' / 'labels'
 OUTPUTS_PATH = OUTPUTS_DIR / 'extracted.jsonl'
 LABELS_PATH = LABELS_DIR / 'train.jsonl'
+LABEL_MAP_PATH = PROJECT_ROOT / 'data' / 'label_map.json'
 
 # Lazy imports for heavy models
 _stt = None
@@ -120,8 +121,14 @@ def _load_extractor():
         try:
             if MODEL_DIR.exists() and MODEL_DIR.is_dir():
                 from extractor.model_infer import SlotFillingExtractor
+                from extractor.base_ner import NERConfig
 
-                _extractor = SlotFillingExtractor(str(MODEL_DIR))
+                config = NERConfig(
+                    model_type="slot-filling",
+                    model_dir=str(MODEL_DIR),
+                    device="cpu"
+                )
+                _extractor = SlotFillingExtractor(config)
         except Exception:
             logging.exception('Failed to load extractor model')
             raise
@@ -747,6 +754,79 @@ def get_ner_models(request):
 
 
 @csrf_exempt
+def ner_extract(request):
+    """Extract entities from text using the active NER model"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=405)
+    
+    try:
+        data = json.loads(request.body)
+        text = data.get('text', '').strip()
+        
+        if not text:
+            return JsonResponse({'error': 'Text is required'}, status=400)
+        
+        extractor = _load_extractor()
+        if extractor is None:
+            return JsonResponse({
+                'error': 'No trained NER model found',
+                'text': text,
+                'entities': {},
+                'raw_entities': []
+            }, status=200)
+        
+        # Get extracted entities
+        extracted_json = extractor.extract(text)
+        
+        # Get raw entity predictions (if available)
+        raw_entities = []
+        try:
+            if hasattr(extractor, 'predict_raw'):
+                raw_entities = extractor.predict_raw(text)
+            elif hasattr(extractor, 'pipe') and extractor.pipe is not None:
+                raw_entities = extractor.pipe(text)
+            
+            # Convert numpy types to native Python types for JSON serialization
+            if raw_entities:
+                raw_entities = [
+                    {
+                        'entity': e.get('entity_group', e.get('entity', '')),
+                        'word': e.get('word', ''),
+                        'score': float(e.get('score', 0)),
+                        'start': int(e.get('start', 0)),
+                        'end': int(e.get('end', 0)),
+                    }
+                    for e in raw_entities
+                ]
+        except Exception as e:
+            logging.warning(f'Could not get raw entities: {e}')
+        
+        # Get active NER model info
+        _ensure_default_ner_models()
+        active_model = NERModel.objects.filter(is_active=True).first()
+        model_info = {
+            'name': active_model.name if active_model else 'slot_model',
+            'type': active_model.model_type if active_model else 'slot-filling',
+            'device': active_model.device if active_model else 'cpu',
+        }
+        
+        return JsonResponse({
+            'text': text,
+            'entities': extracted_json,
+            'raw_entities': raw_entities,
+            'model_info': model_info,
+            'status': 'success'
+        }, status=200)
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('ner_extract failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+@csrf_exempt
 def create_ner_model(request):
     """Create a new NER model"""
     if request.method != 'POST':
@@ -907,6 +987,18 @@ def add_training_entry(request):
         if len(tokens) != len(tags):
             return JsonResponse({'error': 'Number of tokens must match number of tags'}, status=400)
         
+        # Validate tags against entity types from label_map.json
+        valid_tags = ['O']
+        if LABEL_MAP_PATH.exists():
+            with open(LABEL_MAP_PATH, 'r', encoding='utf-8') as f:
+                valid_tags = json.load(f)
+        
+        invalid_tags = [tag for tag in tags if tag not in valid_tags]
+        if invalid_tags:
+            return JsonResponse({
+                'error': f'Invalid tags: {", ".join(set(invalid_tags))}. Valid tags: {", ".join(valid_tags)}'
+            }, status=400)
+        
         # Create labels directory if it doesn't exist
         LABELS_DIR.mkdir(parents=True, exist_ok=True)
         
@@ -947,6 +1039,18 @@ def update_training_entry(request):
         
         if len(tokens) != len(tags):
             return JsonResponse({'error': 'Number of tokens must match number of tags'}, status=400)
+        
+        # Validate tags against entity types from label_map.json
+        valid_tags = ['O']
+        if LABEL_MAP_PATH.exists():
+            with open(LABEL_MAP_PATH, 'r', encoding='utf-8') as f:
+                valid_tags = json.load(f)
+        
+        invalid_tags = [tag for tag in tags if tag not in valid_tags]
+        if invalid_tags:
+            return JsonResponse({
+                'error': f'Invalid tags: {", ".join(set(invalid_tags))}. Valid tags: {", ".join(valid_tags)}'
+            }, status=400)
         
         if not LABELS_PATH.exists():
             return JsonResponse({'error': 'Training data file not found'}, status=404)
@@ -1075,6 +1179,276 @@ def get_data_stats(request):
     except Exception as e:
         tb = traceback.format_exc()
         logging.error('get_data_stats failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+# ============================================================================
+# Entity Type Management Endpoints
+# ============================================================================
+
+# Predefined colors for entity types (for consistent UI display)
+ENTITY_TYPE_COLORS = [
+    '#2196f3', '#4caf50', '#9c27b0', '#ff5722', '#e91e63',
+    '#00bcd4', '#ff9800', '#795548', '#607d8b', '#673ab7',
+    '#3f51b5', '#f44336', '#009688', '#8bc34a', '#ffc107',
+    '#03a9f4', '#cddc39', '#ff5252', '#7c4dff', '#69f0ae',
+]
+
+
+def get_entity_types(request):
+    """Get all entity types from label_map.json"""
+    if request.method != 'GET':
+        return JsonResponse({'error': 'GET required'}, status=405)
+    
+    try:
+        if not LABEL_MAP_PATH.exists():
+            return JsonResponse({
+                'entity_types': [],
+                'raw_labels': ['O'],
+                'total': 0
+            })
+        
+        with open(LABEL_MAP_PATH, 'r', encoding='utf-8') as f:
+            labels = json.load(f)
+        
+        # Extract unique entity types (without B-/I- prefixes)
+        entity_types = set()
+        for label in labels:
+            if label != 'O':
+                # Remove B- or I- prefix
+                entity_type = label[2:] if label.startswith(('B-', 'I-')) else label
+                entity_types.add(entity_type)
+        
+        # Sort and assign colors
+        entity_types_list = sorted(list(entity_types))
+        entity_types_with_colors = []
+        for idx, entity_type in enumerate(entity_types_list):
+            color = ENTITY_TYPE_COLORS[idx % len(ENTITY_TYPE_COLORS)]
+            entity_types_with_colors.append({
+                'name': entity_type,
+                'color': color,
+                'b_label': f'B-{entity_type}',
+                'i_label': f'I-{entity_type}',
+            })
+        
+        return JsonResponse({
+            'entity_types': entity_types_with_colors,
+            'raw_labels': labels,
+            'total': len(entity_types_list)
+        })
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('get_entity_types failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+def get_available_tags(request):
+    """Get all available BIO tags for training data annotation.
+    Tags are derived from entity types in label_map.json.
+    Returns O tag plus B-/I- tags for each entity type.
+    """
+    if request.method != 'GET':
+        return JsonResponse({'error': 'GET required'}, status=405)
+    
+    try:
+        if not LABEL_MAP_PATH.exists():
+            return JsonResponse({
+                'tags': ['O'],
+                'entity_types': [],
+                'tags_with_colors': [{'tag': 'O', 'color': '#9e9e9e', 'type': 'outside'}]
+            })
+        
+        with open(LABEL_MAP_PATH, 'r', encoding='utf-8') as f:
+            labels = json.load(f)
+        
+        # Build tags with colors and entity type info
+        tags_with_colors = []
+        entity_types = set()
+        
+        for label in labels:
+            if label == 'O':
+                tags_with_colors.append({
+                    'tag': 'O',
+                    'color': '#9e9e9e',
+                    'type': 'outside'
+                })
+            else:
+                # Extract entity type
+                prefix = label[:2] if label.startswith(('B-', 'I-')) else ''
+                entity_type = label[2:] if prefix else label
+                entity_types.add(entity_type)
+        
+        # Sort entity types and assign colors
+        sorted_entities = sorted(list(entity_types))
+        entity_color_map = {}
+        for idx, entity_type in enumerate(sorted_entities):
+            entity_color_map[entity_type] = ENTITY_TYPE_COLORS[idx % len(ENTITY_TYPE_COLORS)]
+        
+        # Add B- and I- tags for each entity type
+        for entity_type in sorted_entities:
+            color = entity_color_map[entity_type]
+            tags_with_colors.append({
+                'tag': f'B-{entity_type}',
+                'color': color,
+                'type': 'begin',
+                'entity_type': entity_type
+            })
+            tags_with_colors.append({
+                'tag': f'I-{entity_type}',
+                'color': color,
+                'type': 'inside',
+                'entity_type': entity_type
+            })
+        
+        return JsonResponse({
+            'tags': labels,
+            'entity_types': sorted_entities,
+            'tags_with_colors': tags_with_colors,
+            'total': len(labels)
+        })
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('get_available_tags failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+@csrf_exempt
+def add_entity_type(request):
+    """Add a new entity type to label_map.json"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=405)
+    
+    try:
+        data = json.loads(request.body)
+        entity_name = data.get('name', '').strip().upper()
+        
+        if not entity_name:
+            return JsonResponse({'error': 'Entity type name is required'}, status=400)
+        
+        # Validate entity name (alphanumeric and underscores only)
+        import re
+        if not re.match(r'^[A-Z][A-Z0-9_]*$', entity_name):
+            return JsonResponse({
+                'error': 'Entity name must start with a letter and contain only letters, numbers, and underscores'
+            }, status=400)
+        
+        # Load existing labels
+        labels = ['O']
+        if LABEL_MAP_PATH.exists():
+            with open(LABEL_MAP_PATH, 'r', encoding='utf-8') as f:
+                labels = json.load(f)
+        
+        # Check if entity type already exists
+        b_label = f'B-{entity_name}'
+        i_label = f'I-{entity_name}'
+        
+        if b_label in labels or i_label in labels:
+            return JsonResponse({
+                'error': f'Entity type "{entity_name}" already exists'
+            }, status=400)
+        
+        # Add new labels (B- and I- tags)
+        labels.append(b_label)
+        labels.append(i_label)
+        
+        # Ensure data directory exists
+        LABEL_MAP_PATH.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Save updated labels
+        with open(LABEL_MAP_PATH, 'w', encoding='utf-8') as f:
+            json.dump(labels, f, indent=4)
+        
+        return JsonResponse({
+            'success': True,
+            'message': f'Entity type "{entity_name}" added successfully',
+            'entity_type': {
+                'name': entity_name,
+                'b_label': b_label,
+                'i_label': i_label,
+            }
+        })
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('add_entity_type failed: %s', tb)
+        return JsonResponse({'error': str(e), 'trace': tb}, status=500)
+
+
+@csrf_exempt
+def delete_entity_type(request):
+    """Delete an entity type from label_map.json"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=405)
+    
+    try:
+        data = json.loads(request.body)
+        entity_name = data.get('name', '').strip().upper()
+        
+        if not entity_name:
+            return JsonResponse({'error': 'Entity type name is required'}, status=400)
+        
+        if not LABEL_MAP_PATH.exists():
+            return JsonResponse({'error': 'Label map file not found'}, status=404)
+        
+        # Load existing labels
+        with open(LABEL_MAP_PATH, 'r', encoding='utf-8') as f:
+            labels = json.load(f)
+        
+        b_label = f'B-{entity_name}'
+        i_label = f'I-{entity_name}'
+        
+        # Check if entity type exists
+        if b_label not in labels and i_label not in labels:
+            return JsonResponse({
+                'error': f'Entity type "{entity_name}" not found'
+            }, status=404)
+        
+        # Check if entity type is used in training data
+        in_use = False
+        usage_count = 0
+        if LABELS_PATH.exists():
+            with open(LABELS_PATH, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        entry = json.loads(line)
+                        tags = entry.get('tags', [])
+                        if b_label in tags or i_label in tags:
+                            in_use = True
+                            usage_count += 1
+                    except json.JSONDecodeError:
+                        continue
+        
+        # Warn if entity type is in use (but allow deletion)
+        warning = None
+        if in_use:
+            warning = f'Warning: Entity type "{entity_name}" is used in {usage_count} training entries. Deleting may affect model training.'
+        
+        # Remove labels
+        labels = [l for l in labels if l not in (b_label, i_label)]
+        
+        # Save updated labels
+        with open(LABEL_MAP_PATH, 'w', encoding='utf-8') as f:
+            json.dump(labels, f, indent=4)
+        
+        response = {
+            'success': True,
+            'message': f'Entity type "{entity_name}" deleted successfully',
+            'deleted': [b_label, i_label]
+        }
+        
+        if warning:
+            response['warning'] = warning
+        
+        return JsonResponse(response)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        tb = traceback.format_exc()
+        logging.error('delete_entity_type failed: %s', tb)
         return JsonResponse({'error': str(e), 'trace': tb}, status=500)
 
 

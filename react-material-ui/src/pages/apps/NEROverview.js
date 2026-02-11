@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import StorageIcon from '@mui/icons-material/Storage';
 import SchoolIcon from '@mui/icons-material/School';
 import DatasetIcon from '@mui/icons-material/Dataset';
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import ScienceIcon from '@mui/icons-material/Science';
 
 const NEROverview = () => {
   const navigate = useNavigate();
@@ -30,6 +30,13 @@ const NEROverview = () => {
       icon: <DatasetIcon sx={{ fontSize: 48, color: 'warning.main' }} />,
       path: '/apps/ner-data-management',
       color: '#ed6c02',
+    },
+    {
+      title: 'Tester',
+      description: 'Test the NER model with custom text or previous STT transcripts. View extracted entities.',
+      icon: <ScienceIcon sx={{ fontSize: 48, color: 'info.main' }} />,
+      path: '/apps/ner-tester',
+      color: '#0288d1',
     },
   ];
 

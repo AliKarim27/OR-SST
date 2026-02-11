@@ -18,7 +18,9 @@ const LeftSidebarMenu = ({ toggleActive }) => {
     return location.pathname === "/apps/ner-overview" ||
            location.pathname === "/apps/ner-model-management" ||
            location.pathname === "/apps/ner-training" ||
-           location.pathname === "/apps/ner-data-management";
+           location.pathname === "/apps/ner-data-management" ||
+           location.pathname === "/apps/ner-entity-types" ||
+           location.pathname === "/apps/ner-tester";
   };
 
   return (
@@ -159,6 +161,30 @@ const LeftSidebarMenu = ({ toggleActive }) => {
                   <i className="material-symbols-outlined">dataset</i>
                   <Typography component={"span"} className="title">
                     Training Data
+                  </Typography>
+                </Link>
+
+                <Link
+                  to="/apps/ner-entity-types"
+                  className={`sidebar-menu-link ${isActiveLink(
+                    "/apps/ner-entity-types"
+                  )}`}
+                >
+                  <i className="material-symbols-outlined">label</i>
+                  <Typography component={"span"} className="title">
+                    Entity Types
+                  </Typography>
+                </Link>
+
+                <Link
+                  to="/apps/ner-tester"
+                  className={`sidebar-menu-link ${isActiveLink(
+                    "/apps/ner-tester"
+                  )}`}
+                >
+                  <i className="material-symbols-outlined">science</i>
+                  <Typography component={"span"} className="title">
+                    Tester
                   </Typography>
                 </Link>
               </Box>

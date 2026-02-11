@@ -20,6 +20,7 @@ urlpatterns = [
     path('validate_stt_model/', views.validate_stt_model, name='validate_stt_model'),
     
     # NER endpoints
+    path('ner/extract/', views.ner_extract, name='ner_extract'),
     path('ner/models/', views.get_ner_models, name='get_ner_models'),
     path('ner/models/create/', views.create_ner_model, name='create_ner_model'),
     path('ner/models/delete/', views.delete_ner_model, name='delete_ner_model'),
@@ -28,6 +29,10 @@ urlpatterns = [
     path('ner/data/update/', views.update_training_entry, name='update_training_entry'),
     path('ner/data/delete/', views.delete_training_entry, name='delete_training_entry'),
     path('ner/data/stats/', views.get_data_stats, name='get_data_stats'),
+    path('ner/entity-types/', views.get_entity_types, name='get_entity_types'),
+    path('ner/entity-types/add/', views.add_entity_type, name='add_entity_type'),
+    path('ner/entity-types/delete/', views.delete_entity_type, name='delete_entity_type'),
+    path('ner/available-tags/', views.get_available_tags, name='get_available_tags'),
     path('ner/training/start/', views.start_training, name='start_training'),
     path('ner/training/status/', views.get_training_status, name='get_training_status'),
     path('ner/training/stop/', views.stop_training, name='stop_training'),

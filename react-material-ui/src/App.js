@@ -15,6 +15,8 @@ import NEROverview from "./pages/apps/NEROverview";
 import NERModelManagement from "./pages/apps/NERModelManagement";
 import NERTraining from "./pages/apps/NERTraining";
 import NERDataManagement from "./pages/apps/NERDataManagement";
+import NERTesterPage from "./pages/apps/NERTester";
+import EntityTypesPage from "./pages/apps/EntityTypes";
 
 import BlankPage from "./pages/BlankPage";
 
@@ -65,6 +67,8 @@ const App = () => {
               <Route path="/apps/ner-model-management" element={<NERModelManagement />} />
               <Route path="/apps/ner-training" element={<NERTraining />} />
               <Route path="/apps/ner-data-management" element={<NERDataManagement />} />
+              <Route path="/apps/ner-entity-types" element={<EntityTypesPage />} />
+              <Route path="/apps/ner-tester" element={<NERTesterPage />} />
               
               {/* Home/Default */}
               <Route path="/" element={<BlankPage />} />

@@ -118,6 +118,60 @@ class NERApiService {
     }
     return response.json();
   }
+
+  // NER Inference
+  static async extract(text) {
+    const response = await fetch(`${API_BASE_URL}/ner/extract/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to extract entities');
+    }
+    return response.json();
+  }
+
+  // Entity Type Management
+  static async getEntityTypes() {
+    const response = await fetch(`${API_BASE_URL}/ner/entity-types/`);
+    if (!response.ok) throw new Error('Failed to fetch entity types');
+    return response.json();
+  }
+
+  static async addEntityType(name) {
+    const response = await fetch(`${API_BASE_URL}/ner/entity-types/add/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to add entity type');
+    }
+    return response.json();
+  }
+
+  static async deleteEntityType(name) {
+    const response = await fetch(`${API_BASE_URL}/ner/entity-types/delete/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to delete entity type');
+    }
+    return response.json();
+  }
+
+  // Get available tags for training data annotation
+  static async getAvailableTags() {
+    const response = await fetch(`${API_BASE_URL}/ner/available-tags/`);
+    if (!response.ok) throw new Error('Failed to fetch available tags');
+    return response.json();
+  }
 }
 
 export default NERApiService;
