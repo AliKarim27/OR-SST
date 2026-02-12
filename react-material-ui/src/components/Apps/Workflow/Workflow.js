@@ -36,6 +36,11 @@ import {
   ListItemText,
   ListItemIcon,
   Pagination,
+  Menu,
+  MenuItem,
+  ListItemAvatar,
+  Avatar,
+  Snackbar,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MicIcon from "@mui/icons-material/Mic";
@@ -50,6 +55,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DownloadIcon from "@mui/icons-material/Download";
+import TableChartIcon from "@mui/icons-material/TableChart";
+import DataObjectIcon from "@mui/icons-material/DataObject";
+import DescriptionIcon from "@mui/icons-material/Description";
 import NERApiService from "../../../services/nerApi";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
@@ -190,6 +199,229 @@ const Workflow = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [entityPage, setEntityPage] = useState(0);
   const [entityRowsPerPage, setEntityRowsPerPage] = useState(5);
+
+  // Export state
+  const [exportMenuAnchor, setExportMenuAnchor] = useState(null);
+  const [exportSnackbar, setExportSnackbar] = useState({ open: false, message: "", severity: "success" });
+
+  // Export utility functions
+  const flattenObject = (obj, prefix = "") => {
+    const result = {};
+    for (const key in obj) {
+      const newKey = prefix ? `${prefix}_${key}` : key;
+      if (obj[key] !== null && typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+        Object.assign(result, flattenObject(obj[key], newKey));
+      } else if (Array.isArray(obj[key])) {
+        result[newKey] = obj[key].map(item => 
+          typeof item === "object" ? JSON.stringify(item) : item
+        ).join("; ");
+      } else {
+        result[newKey] = obj[key];
+      }
+    }
+    return result;
+  };
+
+  const exportToJSON = () => {
+    try {
+      const exportData = {
+        transcript,
+        extractionResult,
+        rawEntities,
+        exportedAt: new Date().toISOString(),
+      };
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `or-extraction-${Date.now()}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setExportSnackbar({ open: true, message: "Exported as JSON successfully", severity: "success" });
+    } catch (e) {
+      setExportSnackbar({ open: true, message: `Export failed: ${e.message}`, severity: "error" });
+    }
+    setExportMenuAnchor(null);
+  };
+
+  const exportToCSV = () => {
+    try {
+      // Create CSV from raw entities
+      if (rawEntities.length === 0) {
+        setExportSnackbar({ open: true, message: "No entities to export", severity: "warning" });
+        return;
+      }
+      
+      const headers = ["Entity", "Label", "Confidence", "Start", "End"];
+      const rows = rawEntities.map(e => [
+        `"${(e.word || "").replace(/"/g, '""')}"`,
+        e.entity || "",
+        ((e.score || 0) * 100).toFixed(1),
+        e.start || 0,
+        e.end || 0
+      ]);
+      
+      const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `or-entities-${Date.now()}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setExportSnackbar({ open: true, message: "Exported as CSV successfully", severity: "success" });
+    } catch (e) {
+      setExportSnackbar({ open: true, message: `Export failed: ${e.message}`, severity: "error" });
+    }
+    setExportMenuAnchor(null);
+  };
+
+  const exportToExcel = () => {
+    try {
+      // Create Excel-compatible XML (SpreadsheetML)
+      if (!extractionResult && rawEntities.length === 0) {
+        setExportSnackbar({ open: true, message: "No data to export", severity: "warning" });
+        return;
+      }
+
+      // Flatten the extraction result for tabular display
+      const flatData = extractionResult ? flattenObject(extractionResult) : {};
+      
+      let xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Styles>
+    <Style ss:ID="Header">
+      <Font ss:Bold="1"/>
+      <Interior ss:Color="#E3F2FD" ss:Pattern="Solid"/>
+    </Style>
+  </Styles>`;
+
+      // Sheet 1: Extracted Information
+      xmlContent += `
+  <Worksheet ss:Name="Extracted Info">
+    <Table>
+      <Row>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Field</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Value</Data></Cell>
+      </Row>`;
+      
+      for (const [key, value] of Object.entries(flatData)) {
+        const displayValue = value === null || value === undefined ? "" : String(value);
+        xmlContent += `
+      <Row>
+        <Cell><Data ss:Type="String">${key.replace(/_/g, " ").replace(/&/g, "&amp;")}</Data></Cell>
+        <Cell><Data ss:Type="String">${displayValue.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</Data></Cell>
+      </Row>`;
+      }
+      
+      xmlContent += `
+    </Table>
+  </Worksheet>`;
+
+      // Sheet 2: Raw Entities
+      if (rawEntities.length > 0) {
+        xmlContent += `
+  <Worksheet ss:Name="Raw Entities">
+    <Table>
+      <Row>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Entity</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Label</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Confidence</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Start</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">End</Data></Cell>
+      </Row>`;
+        
+        for (const entity of rawEntities) {
+          xmlContent += `
+      <Row>
+        <Cell><Data ss:Type="String">${(entity.word || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</Data></Cell>
+        <Cell><Data ss:Type="String">${entity.entity || ""}</Data></Cell>
+        <Cell><Data ss:Type="Number">${((entity.score || 0) * 100).toFixed(1)}</Data></Cell>
+        <Cell><Data ss:Type="Number">${entity.start || 0}</Data></Cell>
+        <Cell><Data ss:Type="Number">${entity.end || 0}</Data></Cell>
+      </Row>`;
+        }
+        
+        xmlContent += `
+    </Table>
+  </Worksheet>`;
+      }
+
+      // Sheet 3: Transcript
+      xmlContent += `
+  <Worksheet ss:Name="Transcript">
+    <Table>
+      <Row>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Original Transcript</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">${(transcript || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>`;
+
+      const blob = new Blob([xmlContent], { type: "application/vnd.ms-excel" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `or-extraction-${Date.now()}.xls`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setExportSnackbar({ open: true, message: "Exported as Excel successfully", severity: "success" });
+    } catch (e) {
+      setExportSnackbar({ open: true, message: `Export failed: ${e.message}`, severity: "error" });
+    }
+    setExportMenuAnchor(null);
+  };
+
+  const exportFormattedReport = () => {
+    try {
+      // Create a formatted text report
+      let reportContent = "OR-SST EXTRACTION REPORT\n";
+      reportContent += "=".repeat(50) + "\n\n";
+      reportContent += `Generated: ${new Date().toLocaleString()}\n\n`;
+      
+      reportContent += "TRANSCRIPT\n";
+      reportContent += "-".repeat(30) + "\n";
+      reportContent += (transcript || "No transcript available") + "\n\n";
+      
+      if (extractionResult) {
+        reportContent += "EXTRACTED INFORMATION\n";
+        reportContent += "-".repeat(30) + "\n";
+        const flatData = flattenObject(extractionResult);
+        for (const [key, value] of Object.entries(flatData)) {
+          if (value !== null && value !== undefined && value !== "" && value !== "false") {
+            reportContent += `${key.replace(/_/g, " ").toUpperCase()}: ${value}\n`;
+          }
+        }
+        reportContent += "\n";
+      }
+      
+      if (rawEntities.length > 0) {
+        reportContent += "RAW ENTITIES\n";
+        reportContent += "-".repeat(30) + "\n";
+        reportContent += "Entity | Label | Confidence\n";
+        for (const entity of rawEntities) {
+          reportContent += `${entity.word} | ${entity.entity} | ${((entity.score || 0) * 100).toFixed(1)}%\n`;
+        }
+      }
+
+      const blob = new Blob([reportContent], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `or-report-${Date.now()}.txt`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setExportSnackbar({ open: true, message: "Exported report successfully", severity: "success" });
+    } catch (e) {
+      setExportSnackbar({ open: true, message: `Export failed: ${e.message}`, severity: "error" });
+    }
+    setExportMenuAnchor(null);
+  };
 
   // Inject CSS
   useEffect(() => {
@@ -680,6 +912,54 @@ const Workflow = () => {
 
           <Divider sx={{ my: 2 }} />
 
+          {/* Export Section */}
+          {(extractionResult || rawEntities.length > 0) && (
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="subtitle2" gutterBottom>
+                Export Results
+              </Typography>
+              <Paper variant="outlined" sx={{ p: 2 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  Download the extraction results in your preferred format
+                </Typography>
+                <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<TableChartIcon />}
+                    onClick={exportToExcel}
+                    size="small"
+                  >
+                    Excel (.xls)
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DescriptionIcon />}
+                    onClick={exportToCSV}
+                    size="small"
+                  >
+                    CSV
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DataObjectIcon />}
+                    onClick={exportToJSON}
+                    size="small"
+                  >
+                    JSON
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DescriptionIcon />}
+                    onClick={exportFormattedReport}
+                    size="small"
+                  >
+                    Text Report
+                  </Button>
+                </Box>
+              </Paper>
+            </Box>
+          )}
+
           <Box sx={{ display: "flex", gap: 2 }}>
             <Button
               variant="outlined"
@@ -696,14 +976,63 @@ const Workflow = () => {
             <Button
               variant="contained"
               color="success"
-              startIcon={<SaveIcon />}
-              disabled={!extractionResult}
+              startIcon={<DownloadIcon />}
+              onClick={(e) => setExportMenuAnchor(e.currentTarget)}
+              disabled={!extractionResult && rawEntities.length === 0}
             >
-              Save Results
+              Quick Export
             </Button>
           </Box>
+
+          {/* Export Quick Menu */}
+          <Menu
+            anchorEl={exportMenuAnchor}
+            open={Boolean(exportMenuAnchor)}
+            onClose={() => setExportMenuAnchor(null)}
+          >
+            <MenuItem onClick={exportToExcel}>
+              <ListItemIcon>
+                <TableChartIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Export as Excel</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={exportToCSV}>
+              <ListItemIcon>
+                <DescriptionIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Export as CSV</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={exportToJSON}>
+              <ListItemIcon>
+                <DataObjectIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Export as JSON</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={exportFormattedReport}>
+              <ListItemIcon>
+                <DescriptionIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Export Text Report</ListItemText>
+            </MenuItem>
+          </Menu>
         </Paper>
       )}
+
+      {/* Export Snackbar */}
+      <Snackbar
+        open={exportSnackbar.open}
+        autoHideDuration={4000}
+        onClose={() => setExportSnackbar({ ...exportSnackbar, open: false })}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setExportSnackbar({ ...exportSnackbar, open: false })}
+          severity={exportSnackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {exportSnackbar.message}
+        </Alert>
+      </Snackbar>
 
       {/* Audio Library Selection Dialog */}
       <Dialog

@@ -191,7 +191,7 @@ const EntityTypes = () => {
       )}
 
       {/* Info Card */}
-      <Card sx={{ mb: 3, bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'grey.50' }}>
+      <Card sx={{ mb: 3, bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white' }}>
         <CardContent>
           <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
             <InfoIcon color="info" />
