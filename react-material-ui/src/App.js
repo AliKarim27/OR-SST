@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LeftSidebarMenu from "./components/Layout/LeftSidebarMenu";
 import Footer from "./components/Layout/Footer";
 import TopNavbar from "./components/Layout/TopNavbar"; 
@@ -36,7 +36,6 @@ const App = () => {
   };
 
   const isAuthPage = [
-    "/",
     "/blank-page/",
   ].includes(pathname);
 
@@ -76,11 +75,11 @@ const App = () => {
               <Route path="/apps/ner-entity-types" element={<EntityTypesPage />} />
               <Route path="/apps/ner-tester" element={<NERTesterPage />} />
               
-              {/* Home/Default */}
-              <Route path="/" element={<BlankPage />} />
+              {/* Home/Default - Redirect to Workflow */}
+              <Route path="/" element={<Navigate to="/apps/workflow" replace />} />
               
               {/* Fallback */}
-              <Route path="*" element={<BlankPage />} />
+              <Route path="*" element={<Navigate to="/apps/workflow" replace />} />
             </Routes>
           </div>
         </Router>
