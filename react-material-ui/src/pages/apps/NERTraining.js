@@ -19,9 +19,13 @@ import {
   Paper,
   Grid,
   Chip,
+  Switch,
+  FormControlLabel,
+  Tooltip,
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import NERApiService from '../../services/nerApi';
 
 const NERTraining = () => {
@@ -41,7 +45,13 @@ const NERTraining = () => {
     learningRate: 0.00002,
     maxLength: 512,
     dataPath: 'data/labels/train.jsonl',
+    // Incremental training options
+    incrementalTraining: false,
+    resumeFrom: '',
+    trainFullModel: false,
   });
+
+  const [availableModels, setAvailableModels] = useState([]);
 
   const [stats, setStats] = useState({
     trainSamples: 0,
@@ -51,7 +61,17 @@ const NERTraining = () => {
 
   useEffect(() => {
     loadDataStats();
+    loadAvailableModels();
   }, []);
+
+  const loadAvailableModels = async () => {
+    try {
+      const response = await NERApiService.getModels();
+      setAvailableModels(response.models || []);
+    } catch (err) {
+      console.error('Failed to load models:', err);
+    }
+  };
 
   // Cleanup polling on unmount
   useEffect(() => {
@@ -85,8 +105,16 @@ const NERTraining = () => {
     setActiveStep(1);
 
     try {
+      // Prepare config for API
+      const trainingConfig = {
+        ...config,
+        // Only include resumeFrom if incremental training is enabled
+        resumeFrom: config.incrementalTraining ? config.resumeFrom : null,
+        trainFullModel: config.incrementalTraining ? config.trainFullModel : false,
+      };
+      
       // Start training via API
-      await NERApiService.startTraining(config);
+      await NERApiService.startTraining(trainingConfig);
       
       // Poll for training status
       const pollInterval = setInterval(async () => {
@@ -252,6 +280,67 @@ const NERTraining = () => {
                   disabled={training}
                   fullWidth
                 />
+
+                {/* Incremental Training Section */}
+                <Box sx={{ mt: 2, p: 2, bgcolor: 'grey.50', borderRadius: 1 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                    <Typography variant="subtitle2">Incremental Training</Typography>
+                    <Tooltip title="Continue training from an existing model instead of starting from scratch. Useful when adding new training data.">
+                      <InfoOutlinedIcon fontSize="small" color="action" />
+                    </Tooltip>
+                  </Box>
+                  
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={config.incrementalTraining}
+                        onChange={(e) => {
+                          handleConfigChange('incrementalTraining', e.target.checked);
+                          if (!e.target.checked) {
+                            handleConfigChange('resumeFrom', '');
+                          }
+                        }}
+                        disabled={training}
+                      />
+                    }
+                    label="Continue from existing model"
+                  />
+
+                  {config.incrementalTraining && (
+                    <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <FormControl fullWidth disabled={training}>
+                        <InputLabel>Resume From Model</InputLabel>
+                        <Select
+                          value={config.resumeFrom}
+                          onChange={(e) => handleConfigChange('resumeFrom', e.target.value)}
+                          label="Resume From Model"
+                        >
+                          <MenuItem value="models/slot_model">Current Model (models/slot_model)</MenuItem>
+                          {availableModels.filter(m => m.path !== 'models/slot_model').map((model) => (
+                            <MenuItem key={model.path || model.name} value={model.path || `models/${model.name}`}>
+                              {model.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={config.trainFullModel}
+                            onChange={(e) => handleConfigChange('trainFullModel', e.target.checked)}
+                            disabled={training}
+                          />
+                        }
+                        label="Train full model (slower but more thorough)"
+                      />
+                      
+                      <Alert severity="info" sx={{ mt: 1 }}>
+                        Incremental training will use a lower learning rate automatically for better fine-tuning.
+                      </Alert>
+                    </Box>
+                  )}
+                </Box>
               </Box>
             </CardContent>
           </Card>
@@ -274,7 +363,7 @@ const NERTraining = () => {
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography color="textSecondary">Total Labels:</Typography>
-                  <Chip label={stats.totalLabels} color="success" size="small" />
+                  <Chip label={stats.totalLabels} color="success" size="small" sx={{ color: 'white' }} />
                 </Box>
               </Box>
             </CardContent>

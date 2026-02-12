@@ -54,7 +54,7 @@ def create_dev_from_train():
     
     print(f"[OK] Split data: {len(train_examples)} train, {len(dev_examples)} validation", flush=True)
 
-def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_rate=2e-5, max_length=512, output_dir="models/slot_model"):
+def main(base_model="distilbert-base-uncased", resume_from=None, epochs=5, batch_size=8, learning_rate=2e-5, max_length=512, output_dir="models/slot_model", train_full_model=False):
     # Disable CUDA before anything else
     import os
     os.environ['CUDA_VISIBLE_DEVICES'] = ''
@@ -67,6 +67,19 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
     device = torch.device("cpu")
     print(f"[DEVICE] Using device: {device}", flush=True)
     
+    # Determine which model to load from
+    model_path = resume_from if resume_from else base_model
+    is_incremental = resume_from is not None
+    
+    if is_incremental:
+        print(f"[MODE] Incremental training - continuing from: {resume_from}", flush=True)
+        # For incremental training, use lower learning rate by default
+        if learning_rate >= 2e-5:
+            learning_rate = learning_rate / 5  # Reduce LR for fine-tuning
+            print(f"[CONFIG] Reduced learning_rate to {learning_rate} for incremental training", flush=True)
+    else:
+        print(f"[MODE] Training from scratch using base model: {base_model}", flush=True)
+    
     # Reduce batch size for CPU training to avoid memory issues
     if batch_size > 2:
         batch_size = 2
@@ -77,7 +90,7 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
         max_length = 256
         print(f"[CONFIG] Reduced max_length to {max_length} for CPU training", flush=True)
     
-    print(f"[CONFIG] model={base_model}, epochs={epochs}, batch_size={batch_size}, lr={learning_rate}, max_len={max_length}", flush=True)
+    print(f"[CONFIG] model={model_path}, epochs={epochs}, batch_size={batch_size}, lr={learning_rate}, max_len={max_length}", flush=True)
     
     label_list, label2id, id2label = load_labels("data/label_map.json")
     print(f"[LABELS] Loaded {len(label_list)} labels from label_map.json", flush=True)
@@ -90,7 +103,7 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
     print(f"[OK] Dataset loaded: {len(ds['train'])} train, {len(ds['validation'])} validation", flush=True)
 
     print("[TOKENIZER] Loading tokenizer...", flush=True)
-    tokenizer = AutoTokenizer.from_pretrained(base_model)
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
     print("[OK] Tokenizer loaded", flush=True)
 
     def encode(example):
@@ -119,7 +132,7 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
     ds_tok = ds.map(encode)
     print("[OK] Dataset tokenized", flush=True)
 
-    print(f"[MODEL] Loading model: {base_model}...", flush=True)
+    print(f"[MODEL] Loading model: {model_path}...", flush=True)
     
     # Load model with CPU-only settings
     try:
@@ -127,7 +140,7 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
         warnings.filterwarnings('ignore')
         
         model = AutoModelForTokenClassification.from_pretrained(
-            base_model,
+            model_path,
             num_labels=len(label_list),
             id2label=id2label,
             label2id=label2id,
@@ -136,10 +149,15 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
         )
         model = model.to(device)  # Explicitly move to CPU
         
-        # CRITICAL: Freeze base model, only train classifier head
-        print("[OPTIMIZE] Freezing base model, training only classifier head", flush=True)
-        for param in model.distilbert.parameters():
-            param.requires_grad = False
+        # Decide whether to freeze base model
+        if train_full_model or is_incremental:
+            # For incremental training, train the full model for better adaptation
+            print("[OPTIMIZE] Training FULL model (all parameters)", flush=True)
+        else:
+            # CRITICAL: Freeze base model, only train classifier head
+            print("[OPTIMIZE] Freezing base model, training only classifier head", flush=True)
+            for param in model.distilbert.parameters():
+                param.requires_grad = False
         
         # Count trainable parameters
         trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -151,9 +169,12 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
         print(f"[ERROR] Failed to load model: {e}", flush=True)
         raise
 
+    # Adjust learning rate multiplier based on training mode
+    lr_multiplier = 1 if (train_full_model or is_incremental) else 10
+    
     args = TrainingArguments(
         output_dir=output_dir,
-        learning_rate=learning_rate * 10,  # Higher learning rate for classifier-only training
+        learning_rate=learning_rate * lr_multiplier,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=max(1, batch_size // 2),  # Even smaller eval batch
         num_train_epochs=epochs,
@@ -197,22 +218,26 @@ def main(base_model="distilbert-base-uncased", epochs=5, batch_size=8, learning_
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train NER Token Classification Model')
     parser.add_argument('--base_model', type=str, default='distilbert-base-uncased', help='Base model name')
+    parser.add_argument('--resume_from', type=str, default=None, help='Path to existing fine-tuned model to continue training from (e.g., models/slot_model)')
     parser.add_argument('--epochs', type=int, default=5, help='Number of training epochs')
     parser.add_argument('--batch_size', type=int, default=8, help='Training batch size')
     parser.add_argument('--learning_rate', type=float, default=2e-5, help='Learning rate')
     parser.add_argument('--max_length', type=int, default=512, help='Max sequence length')
     parser.add_argument('--output_dir', type=str, default='models/slot_model', help='Output directory')
+    parser.add_argument('--train_full_model', action='store_true', help='Train full model instead of just classifier head (slower but better for incremental)')
     
     args = parser.parse_args()
     
     try:
         main(
             base_model=args.base_model,
+            resume_from=args.resume_from,
             epochs=args.epochs,
             batch_size=args.batch_size,
             learning_rate=args.learning_rate,
             max_length=args.max_length,
-            output_dir=args.output_dir
+            output_dir=args.output_dir,
+            train_full_model=args.train_full_model
         )
     except Exception as e:
         print(f"[ERROR] Training failed with error: {e}", flush=True)

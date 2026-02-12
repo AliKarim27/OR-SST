@@ -1501,6 +1501,15 @@ def _run_training_script(config):
             '--output_dir', f"models/{config.get('modelName', 'slot_model')}"
         ]
         
+        # Add incremental training option if specified
+        resume_from = config.get('resumeFrom')
+        if resume_from:
+            cmd.extend(['--resume_from', resume_from])
+        
+        # Add train full model flag if specified
+        if config.get('trainFullModel', False):
+            cmd.append('--train_full_model')
+        
         # Start subprocess
         _training_process = subprocess.Popen(
             cmd,

@@ -87,6 +87,15 @@ const theme = createTheme({
     fontFamily: interFontFamily,
     fontSize: 12.3,
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        containedSuccess: {
+          color: "#ffffff",
+        },
+      },
+    },
+  },
 });
 
 export default theme;
