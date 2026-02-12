@@ -6,7 +6,7 @@ import numpy as np
 import librosa
 import torch
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
-from .base_stt import BaseSTT
+from .base_stt import BaseSTT, postprocess_for_ner
 
 TARGET_SR = 16000
 
@@ -43,7 +43,19 @@ class Wav2Vec2STT(BaseSTT):
             audio = audio / mx
         return audio
 
-    def transcribe(self, audio_data: np.ndarray, language: str = "en") -> str:
+    def transcribe(self, audio_data: np.ndarray, language: str = "en", postprocess: bool = True) -> str:
+        """
+        Transcribe audio to text.
+        
+        Args:
+            audio_data: Preprocessed audio data
+            language: Language code (ignored for Wav2Vec2, English-only)
+            postprocess: If True, applies post-processing for NER model input
+                        (lowercase, remove punctuation, normalize whitespace)
+        
+        Returns:
+            Transcribed text string
+        """
         if audio_data is None or len(audio_data) == 0:
             return ""
         # Wav2Vec2 models are typically English-only; language is ignored.
@@ -56,6 +68,11 @@ class Wav2Vec2STT(BaseSTT):
             predicted_ids = torch.argmax(logits, dim=-1)
 
         transcript = self.processor.batch_decode(predicted_ids)[0].strip()
+        
+        # Apply post-processing for DistilBERT NER model
+        if postprocess:
+            transcript = postprocess_for_ner(transcript)
+        
         return transcript
 
     def is_available(self) -> bool:

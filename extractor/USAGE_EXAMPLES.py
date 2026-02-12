@@ -26,7 +26,7 @@ extractor = NERFactory.create(
 
 if extractor is not None and extractor.is_available():
     # Extract entities from transcript
-    transcript = "The patient was anesthetized by Dr. Smith at 14:30"
+    transcript = "the patient was anesthetized by doctor smith at 14 30"
     result = extractor.extract(transcript)
     print("Extracted entities:", result)
     

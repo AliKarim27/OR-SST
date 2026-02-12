@@ -26,7 +26,7 @@ def example_1_basic_usage():
         return
     
     # Extract entities from transcript
-    transcript = "Surgery date was January 15th 2025. Surgeon was Dr. Smith."
+    transcript = "surgery date was january 15th 2025 surgeon was doctor smith"
     result = ner.extract(transcript)
     
     print(f"Extracted entities: {result}")
@@ -152,11 +152,11 @@ def example_6_full_pipeline():
     
     # Step 4: Extract entities
     transcript = """
-    Surgery performed on January 15th 2025 at 08:30 AM.
-    Surgeon: Dr. John Smith
-    Anesthetist: Dr. Jane Doe
-    Procedure: Appendectomy
-    Medications: Propofol 200mg, Fentanyl 100mcg
+    surgery performed on january 15th 2025 at 08 30 am
+    surgeon dr john smith
+    anesthetist dr jane doe
+    procedure appendectomy
+    medications propofol 200mg fentanyl 100mcg
     """
     
     # Optional: Preprocess text

@@ -1,7 +1,7 @@
 from faster_whisper import WhisperModel
 import numpy as np
 import librosa
-from .base_stt import BaseSTT
+from .base_stt import BaseSTT, postprocess_for_ner
 
 TARGET_SR = 16000
 
@@ -29,14 +29,32 @@ class FasterWhisperSTT(BaseSTT):
             audio = audio / mx
         return audio
 
-    def transcribe(self, audio_16k: np.ndarray, language="en") -> str:
+    def transcribe(self, audio_16k: np.ndarray, language="en", postprocess: bool = True) -> str:
+        """
+        Transcribe audio to text.
+        
+        Args:
+            audio_16k: Preprocessed 16kHz audio data
+            language: Language code (default: "en")
+            postprocess: If True, applies post-processing for NER model input
+                        (lowercase, remove punctuation, normalize whitespace)
+        
+        Returns:
+            Transcribed text string
+        """
         print("DEBUG | audio length:", len(audio_16k))
         print("DEBUG | audio min/max:", audio_16k.min(), audio_16k.max())
 
         segments, info = self.model.transcribe(audio_16k, language=language)
 
         text = " ".join(s.text for s in segments).strip()
-        print("DEBUG | transcript:", text)
+        print("DEBUG | raw transcript:", text)
+        
+        # Apply post-processing for DistilBERT NER model
+        if postprocess:
+            text = postprocess_for_ner(text)
+            print("DEBUG | processed transcript:", text)
+        
         return text
     
     def is_available(self) -> bool:

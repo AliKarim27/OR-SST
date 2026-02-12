@@ -48,6 +48,11 @@ class STTFactory:
             return None
         
         stt_class = cls._registry[model_type_lower]
+
+        # Normalize model name for wav2vec to a valid HF model id
+        if model_type_lower in {"wav2vec", "wav2vec2"}:
+            if not model_name or model_name.lower() in {"wav2vec", "wav2vec2", "base", "default"}:
+                model_name = "facebook/wav2vec2-base-960h"
         
         # Check if implementation is available
         try:

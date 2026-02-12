@@ -132,7 +132,7 @@ config = NERConfig()
 ner = NERFactory.create('slot-filling', config)
 
 # Extract entities
-transcript = "Surgery date was January 15th 2025. Surgeon was Dr. Smith."
+transcript = "Surgery date was January 15th 2025. Surgeon was Doctor Smith."
 result = ner.extract(transcript)
 ```
 

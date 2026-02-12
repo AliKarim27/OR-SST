@@ -51,15 +51,15 @@ const DEFAULT_COLOR = '#9e9e9e';
 const SAMPLE_TEXTS = [
   {
     title: "General Surgery",
-    text: "Patient John Doe underwent appendectomy on January 15, 2026 at 08:30. Surgeon was Dr. Smith with anesthetist Dr. Johnson. Blood pressure was 120 over 80. Administered propofol 200mg IV."
+    text: "patient john doe underwent appendectomy on january 15 2026 at 08 30 surgeon was doctor smith with anesthetist doctor johnson blood pressure was 120 over 80 administered propofol 200mg iv"
   },
   {
     title: "Orthopedic Procedure",
-    text: "Total knee replacement performed by Dr. Williams on February 3, 2026. Patient received spinal anesthesia. Operation duration was 2 hours 30 minutes. Cefazolin 1g prophylaxis given."
+    text: "total knee replacement performed by doctor williams on february 3 2026 patient received spinal anesthesia operation duration was 2 hours 30 minutes cefazolin 1g prophylaxis given"
   },
   {
     title: "Cardiac Surgery",
-    text: "CABG procedure started at 07:00 in OR 5. Lead surgeon Dr. Anderson, first assistant Dr. Brown. Patient vitals: heart rate 72, oxygen saturation 98 percent. Heparin administered during bypass."
+    text: "cabg procedure started at 07 00 in or 5 lead surgeon doctor anderson first assistant doctor brown patient vitals heart rate 72 oxygen saturation 98 percent heparin administered during bypass"
   },
 ];
 

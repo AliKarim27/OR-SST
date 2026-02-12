@@ -32,9 +32,9 @@ This will:
 ```
 === EXTRACTION RESULTS - Review and correct if needed ===
 Index  Token                          Predicted Tag
-0      Surgery                        O
+0      surgery                        O
 1      date                           O
-2      January                        >>> B-DATE <<<
+2      january                        >>> B-DATE <<<
 3      15th                           >>> I-DATE <<<
 4      2025                           >>> I-DATE <<<
 
@@ -43,9 +43,9 @@ Enter corrections as: index:NEW_TAG (e.g., '2:B-DATE' or '2:O')
 Type 'done' when finished, 'skip' to keep predictions, 'list' to see available tags
 
 Enter correction: 0:B-PROCEDURE
-✓ Updated token 0 ('Surgery') from O to B-PROCEDURE
+Updated token 0 ('surgery') from O to B-PROCEDURE
 Enter correction: 1:I-PROCEDURE
-✓ Updated token 1 ('date') from O to I-PROCEDURE
+Updated token 1 ('date') from O to I-PROCEDURE
 Enter correction: done
 
 Save these corrections for retraining?
@@ -95,7 +95,7 @@ config = NERConfig(
 tester = NERInteractiveTester(config)
 
 # Test a single transcript
-transcript = "Surgery date was January 15th 2025. Surgeon was Dr. Smith."
+transcript = "surgery date was january 15th 2025 surgeon was doctor smith"
 tester.test_and_correct(transcript, user_name="john_doe")
 
 # Or start an interactive session
